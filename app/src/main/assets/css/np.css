@@ -1,0 +1,275 @@
+/* Lecture en cours (accueil) : carte neutre en bas à droite, entre/sort avec animation */
+.np{ position:absolute; z-index:30; box-sizing:border-box; right:1.6rem; top:32.1rem; width:17.2rem; height:11.4rem; display:grid; grid-template-columns:3.4rem 1fr 1.6rem; grid-template-rows:3.4rem .5rem 2.8rem auto; grid-template-areas:"s m x" "p p p" "c c c" "n n n"; align-items:center; gap:.5rem .65rem; padding:.9rem .9rem .8rem; border-radius:var(--r,1.6rem); overflow:hidden;
+  background:rgba(var(--card-rgb),var(--card-op,.85)); box-shadow:0 0 0 1px rgba(255,255,255,.06); opacity:0; transform:translateX(1.5rem) scale(.97); }
+.np[hidden]{ display:none; }
+.np.in{ animation:npIn .45s cubic-bezier(.2,.9,.3,1.15) forwards; }
+.np.out{ animation:npOut .36s cubic-bezier(.5,0,.8,.4) forwards; pointer-events:none; }
+@keyframes npIn{ from{ opacity:0; transform:translateX(1.5rem) scale(.97); } to{ opacity:1; transform:none; } }
+@keyframes npOut{ from{ opacity:1; transform:none; } to{ opacity:0; transform:translateX(1.5rem) scale(.95); } }
+.np .np-src{ grid-area:s; } .np .np-meta{ grid-area:m; } .np .np-x{ grid-area:x; } .np .np-prog{ grid-area:p; } .np .np-ctl{ grid-area:c; justify-content:center; gap:1rem; } .np .np-next{ grid-area:n; }
+.np button{ flex:none; width:2.8rem; height:2.8rem; border:0; border-radius:50%; display:grid; place-items:center; color:#e9ebef; background:rgba(255,255,255,.08); cursor:pointer; transition:transform .15s, background .2s; }
+.np button:active{ transform:scale(.9); background:rgba(255,255,255,.18); }
+.np button .ic{ width:1.2rem; height:1.2rem; }
+.np .big{ width:2.8rem; height:2.8rem; background:#e9ebef; color:#14161a; }
+.np .np-src{ width:3.4rem; height:3.4rem; border-radius:1rem; background:linear-gradient(145deg,#3a3d44,#25272c); color:#9aa0aa; box-shadow:inset 0 0 0 1px rgba(255,255,255,.06); } .np .np-src .ic{ width:1.5rem; height:1.5rem; }
+.np .np-x{ width:2rem; height:2rem; background:transparent; color:#8b909a; align-self:start; } .np .np-x .ic{ width:.95rem; height:.95rem; }
+.np-meta{ min-width:0; display:flex; flex-direction:column; gap:.15rem; cursor:pointer; }
+.np-meta b{ font-size:.95rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.np-meta span{ font-size:.76rem; color:#8b909a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.np-ctl{ display:flex; align-items:center; }
+.np-prog{ position:relative; height:.22rem; border-radius:.12rem; background:rgba(255,255,255,.12); overflow:hidden; }
+.np-prog i{ position:absolute; top:0;right:0;bottom:0;left:0; border-radius:.12rem; background:#d8dbe1; transform-origin:left; transform:scaleX(var(--p,0)); transition:transform 1s linear; }
+.np-next{ display:flex; gap:.5rem; align-items:baseline; min-width:0; font-size:.74rem; padding-top:.1rem; border-top:1px solid rgba(255,255,255,.06); }
+.np-next em{ font-style:normal; color:#8b909a; flex:none; } .np-next span{ color:#cfd2d8; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.np button.on{ background:rgba(255,255,255,.9); color:#14161a; }
+/* Média plein écran : à suivre */
+.upnext{ display:flex; align-items:center; gap:.8rem; margin-top:1rem; padding:.7rem .9rem; border-radius:1.1rem; background:rgba(255,255,255,.05); }
+.upnext .cover{ width:2.6rem; height:2.6rem; flex:none; border-radius:.7rem; } .upnext em{ display:block; font-style:normal; font-size:.7rem; color:#8b909a; } .upnext b{ font-size:.95rem; font-weight:600; }
+/* Compteur incrusté sous la voiture */
+.hud{ position:absolute; z-index:12; left:50%; top:30.1rem; margin-left:-9rem; width:18rem; height:3.6rem; display:flex; align-items:center; justify-content:center; gap:1.6rem; border-radius:1.8rem; box-sizing:border-box;
+  background:linear-gradient(180deg,rgba(0,0,0,.34),rgba(255,255,255,.035)); box-shadow:inset 0 .12rem .5rem rgba(0,0,0,.55), inset 0 -1px 0 rgba(255,255,255,.07); }
+.hud[hidden]{ display:none; }
+.hud i{ width:1px; height:1.7rem; background:rgba(255,255,255,.12); }
+.hud div{ display:flex; align-items:baseline; gap:.35rem; } .hud b{ font-size:1.75rem; font-weight:600; font-variant-numeric:tabular-nums; letter-spacing:-.01em; } .hud small{ font-size:.72rem; color:#8b909a; }
+.hud .hud-c b{ font-size:1.4rem; color:#cfd2d8; }
+.cover{ background:linear-gradient(150deg,#4a4d54,#26282d); color:#c9ccd2; }
+
+/* Favoris radio : édition */
+.fav-h{ display:flex; align-items:center; justify-content:space-between; } .fav-h .pill.on{ background:#e9ebef; color:#14161a; }
+.fv.ed{ box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35); }
+#favsheet{ position:absolute; z-index:120; top:0;right:0;bottom:0;left:0; display:grid; place-items:center; background:rgba(0,0,0,.55); opacity:0; transition:opacity .2s; } #favsheet[hidden]{ display:none; } #favsheet.on{ opacity:1; }
+.fs-card{ width:30rem; padding:1.6rem; border-radius:1.8rem; background:rgb(var(--card-rgb)); box-shadow:0 0 0 1px rgba(255,255,255,.08), 0 1.5rem 4rem rgba(0,0,0,.6); transform:translateY(1rem) scale(.97); transition:transform .25s cubic-bezier(.2,.9,.3,1.1); } #favsheet.on .fs-card{ transform:none; }
+.fs-card h3{ margin:0 0 1rem; font-size:1.15rem; } .fs-card label{ display:block; font-size:.75rem; color:var(--dim); } .fs-card input{ display:block; width:100%; box-sizing:border-box; margin-top:.4rem; height:3.2rem; padding:0 1rem; border:0; border-radius:1rem; background:rgba(255,255,255,.08); color:inherit; font:inherit; font-size:1.05rem; outline:none; box-shadow:inset 0 0 0 1px rgba(255,255,255,.12); } .fs-card input:focus{ box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5); }
+.fs-b{ display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.2rem; } .fs-b .pill{ flex:1 1 auto; justify-content:center; } .fs-b .danger{ color:#ff6b6b; }
+
+/* Plateau tournant + voiture légèrement réduite */
+.hero{ top:7rem; width:46rem; height:20.4rem; margin-left:-23rem; }
+.hero .himg.b{ opacity:0 !important; pointer-events:none; }
+.platter{ position:absolute; left:3.4%; width:93.2%; top:42.15%; height:48.7%; pointer-events:none; }
+.platter::before{ content:""; position:absolute; top:0;right:0;bottom:0;left:0; border-radius:50%; transform:translateY(.6rem); background:linear-gradient(180deg,#15161a,#0a0b0d); box-shadow:0 .9rem 1.6rem rgba(0,0,0,.45); }
+.platter::after{ content:""; position:absolute; top:0;right:0;bottom:0;left:0; border-radius:50%;
+  background:repeating-radial-gradient(ellipse at 50% 50%, transparent 0 9%, rgba(255,255,255,.035) 9% 9.7%), radial-gradient(ellipse at 50% 38%, rgba(120,124,134,.55), rgba(70,73,81,.6) 58%, rgba(44,46,52,.75));
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.14), inset 0 .2rem .6rem rgba(255,255,255,.08); }
+[data-platter=off] .platter{ display:none; }
+.hud{ top:29.6rem; height:3.2rem; }
+
+/* v21 : vidéo de rotation fluide (VP9 alpha) */
+.hero #carVid{ visibility:hidden; pointer-events:none; user-select:none; opacity:1 !important; }
+.hero.vid #carVid{ visibility:visible; }
+.hero.vid #carImg, .hero.vid #carImg2{ visibility:hidden; }
+#pwsheet{ position:absolute; top:0;right:0;bottom:0;left:0; z-index:90; display:grid; place-items:center; background:rgba(6,7,9,.6); opacity:0; transition:opacity .2s; }
+#pwsheet.on{ opacity:1; } #pwsheet[hidden]{ display:none; }
+#pwsheet .fs-card{ width:34rem; padding:2.4rem; border-radius:1.8rem; background:#23262c; text-align:center; }
+#pwsheet h3{ font-size:2.2rem; margin:0 0 .8rem; } .pw-t{ opacity:.7; margin:0 0 2rem; }
+#pwsheet .fs-b{ display:flex; gap:1rem; justify-content:center; }
+#pwsheet .pill.danger{ background:#c8372f; color:#fff; }
+
+/* v21 : batterie téléphone, badge radars */
+.phbat{ display:inline-flex; align-items:center; gap:.5rem; margin-right:.8rem; font-size:1.3rem; opacity:.8; font-variant-numeric:tabular-nums; }
+.phbat i{ position:relative; width:2.2rem; height:1.1rem; border:1.5px solid rgba(255,255,255,.7); border-radius:.35rem; padding:1px; }
+.phbat i::after{ content:""; position:absolute; right:-.45rem; top:.2rem; width:.25rem; height:.5rem; background:rgba(255,255,255,.7); border-radius:0 .15rem .15rem 0; }
+.phbat b{ display:block; height:100%; background:#d9dde3; border-radius:.2rem; }
+.phbat.low b{ background:#e0584f; } .phbat[hidden]{ display:none; }
+.rbadge{ position:absolute; left:50%; top:7.4rem; z-index:40; transform:translate(-50%,-1rem); opacity:0; display:flex; align-items:center; gap:.8rem; padding:.7rem 1.4rem .7rem 1rem; border-radius:3rem; background:rgba(30,33,38,.88); border:1px solid rgba(255,255,255,.14); font-size:1.4rem; pointer-events:none; overflow:hidden; }
+.rbadge svg{ width:2.2rem; height:2.2rem; position:relative; z-index:1; }
+.rbadge i{ position:absolute; left:1.1rem; top:50%; width:2.2rem; height:2.2rem; margin:-1.1rem 0 0 0; border-radius:50%; border:1.5px solid rgba(255,255,255,.55); opacity:0; }
+.rbadge.on{ animation:rbin 2.6s ease both; }
+.rbadge.on i{ animation:rbw 1.2s ease-out 3; } .rbadge.on i:nth-child(2){ animation-delay:.25s; } .rbadge.on i:nth-child(3){ animation-delay:.5s; }
+.rbadge[hidden]{ display:none; }
+@keyframes rbin{ 0%{opacity:0;transform:translate(-50%,-1rem)} 12%,82%{opacity:1;transform:translate(-50%,0)} 100%{opacity:0;transform:translate(-50%,-.6rem)} }
+@keyframes rbw{ 0%{opacity:.8;transform:scale(.5)} 100%{opacity:0;transform:scale(2.6)} }
+.ph-n{ display:flex; align-items:center; gap:.7rem; white-space:nowrap; }
+.phbat{ margin-right:0 !important; font-size:1.15rem !important; white-space:nowrap; } .phbat em{ font-style:normal; }
+.phbat i{ width:1.8rem !important; height:.9rem !important; }
+.ph-t .ph-n .phbat{ display:inline-flex; align-items:center; gap:.5rem; margin:0; font-size:1.15rem; font-weight:500; opacity:.85; line-height:1; white-space:nowrap; }
+.ph-t .ph-n .phbat[hidden]{ display:none; }
+.ph-t .ph-n .phbat i{ position:relative; display:block; width:1.9rem; height:.95rem; border:1.5px solid rgba(255,255,255,.7); border-radius:.3rem; padding:1px; font-style:normal; box-sizing:border-box; }
+.ph-t .ph-n .phbat i b{ display:block; height:100%; font-size:0; border-radius:.15rem; background:#d9dde3; }
+.ph-t .ph-n .phbat.low i b{ background:#e0584f; }
+.ph-t .ph-n .phbat em{ font-style:normal; font-size:1.15rem; }
+.rbadge{ top:5.4rem !important; font-size:1.2rem !important; }
+.ph-t .ph-n{ display:flex; align-items:center; gap:.8rem; } .ph-t .ph-n #phSub{ display:inline; }
+.ph-t .ph-n #phSub:empty{ display:none; }
+.ph-t .ph-n{ white-space:normal !important; flex-wrap:wrap; row-gap:.2rem; }
+
+/* v22 : Moniteur moteur cadrans */
+.gauges{ margin:auto; display:flex; gap:7rem; justify-content:center; align-items:center; padding-top:1rem; }
+.gauges .rg.xl{ width:22rem; height:22rem; } .gauges .rg.xl .rv b{ font-size:5.6rem; }
+.gdots{ display:flex; gap:1rem; justify-content:center; margin:1rem 0 .4rem; }
+.gdots button{ width:1rem; height:1rem; border-radius:50%; border:0; background:rgba(255,255,255,.22); padding:0; }
+.gdots button.on{ background:#fff; width:2.4rem; border-radius:.5rem; }
+/* v22 : radars au centre + multimédia plus large vers la gauche */
+#radarFx.compact{ left:50% !important; top:50% !important; bottom:auto !important; transform:translate(-50%,-50%) !important; width:26rem !important; height:22rem !important; background:rgba(22,25,30,.82) !important; backdrop-filter:blur(14px); }
+#radarFx.compact .rrad svg{ width:16rem; height:19rem; }
+.rbadge{ display:none !important; }
+.np{ width:25rem !important; }
+/* test des ouvrants : tuile agrandie au centre */
+.doortile.big{ left:50% !important; top:50% !important; width:22rem; flex-direction:column; text-align:center; z-index:60; transform:translate(-50%,-50%) !important; background:rgba(24,27,32,.9); backdrop-filter:blur(14px); padding:2rem 2.4rem; will-change:transform; }
+.doortile.big svg{ width:11rem; height:23rem; }
+.doortile.big .dr,.doortile.big .pt,.doortile.big .hood,.doortile.big .trunk{ transition-duration:.9s !important; will-change:transform; }
+.doortile.big .dtxt b{ font-size:1.5rem; } .doortile.big .dtxt span{ font-size:1.1rem; }
+#radarFx.compact{ top:50% !important; bottom:auto !important; transform:translate(-50%,-50%) !important; width:22rem !important; height:17rem !important; background:rgba(14,16,20,.82) !important; backdrop-filter:blur(10px); }
+#radarFx.compact .rrad svg{ width:12rem !important; height:14rem !important; }
+.rbadge{ display:none !important; }
+#radarFx.compact{ border-radius:1.8rem !important; }
+
+/* v21c : ouvrants plus petits, voiture plus soignée */
+.doortile{ width:16.5rem !important; padding:.8rem 1rem !important; }
+.doortile svg{ width:3rem !important; height:6.3rem !important; }
+.doortile .b{ fill:url(#dtb) !important; stroke:rgba(255,255,255,.6) !important; stroke-width:1.2 !important; }
+.doortile .gl{ fill:url(#dtg) !important; } .doortile .rf{ fill:rgba(255,255,255,.1) !important; stroke:rgba(255,255,255,.18); stroke-width:.8; }
+.doortile .ln{ fill:none; stroke:rgba(255,255,255,.18); stroke-width:1; } .doortile .hl{ fill:rgba(255,244,214,.75); } .doortile .tl{ fill:#e5483f; opacity:.85; } .doortile .mir{ fill:rgba(255,255,255,.28); }
+.doortile.big{ width:15rem !important; padding:1.4rem 1.6rem !important; border-radius:1.8rem; }
+.doortile.big svg{ width:6.8rem !important; height:14.3rem !important; }
+.doortile.big .dtxt b{ font-size:1.2rem; } .doortile.big .dtxt span{ font-size:.9rem; }
+#radarFx .rlab{ display:none; }
+#radarFx.idle .rarc{ animation:rp 1.6s ease-in-out infinite; stroke:rgba(255,255,255,.35); }
+.rarc{ stroke-width:7; }
+
+#radarFx .rrad svg{ width:11rem !important; height:31rem !important; }
+#radarFx.compact{ width:19rem !important; height:25rem !important; }
+#radarFx.compact .rrad svg{ width:8.6rem !important; height:23.6rem !important; }
+#side .sos{ margin-top:auto; border-top:1px solid rgba(255,255,255,.08); border-radius:0 0 1.2rem 1.2rem; opacity:.85; }
+.topcar .body{ fill:url(#dtb) !important; stroke:rgba(255,255,255,.6) !important; } .topcar .glass{ fill:url(#dtg) !important; }
+.topcar .ln{ fill:none; stroke:rgba(255,255,255,.18); stroke-width:1; } .topcar .hl{ fill:rgba(255,244,214,.75); } .topcar .tl{ fill:#e5483f; opacity:.85; } .topcar .mir{ fill:rgba(255,255,255,.28); }
+.np{ width:19rem !important; }
+.appgrid:not(.pk){ display:flex !important; flex-wrap:wrap; justify-content:center; align-content:center; gap:1.6rem 0 !important; min-height:100%; }
+.appgrid:not(.pk) > *{ width:calc(100% / 7); }
+.mini-host{ height:100%; width:100%; } .mini-host .mmain.inpane, #mMain.inpane{ position:relative; height:100%; width:100%; top:auto;right:auto;bottom:auto;left:auto; box-shadow:none; background:transparent; }
+/* Moniteur moteur dans un volet : mêmes éléments, plus compacts */
+.inpane .br{ grid-template-columns:8.4rem 1fr 5.8rem; gap:.9rem; } .inpane .bl{ font-size:.95rem; } .inpane .bv{ font-size:.9rem; } .inpane .brs{ gap:1.1rem; }
+.inpane .bga{ width:2rem; height:4.6rem; margin:0 .2rem; } .inpane .bgc{ padding:2.8rem .4rem .6rem; }
+/* v22 : voiture vue de dessus redessinée (proportions réelles) */
+.doortile .fl{ transform-origin:13px 104px !important; } .doortile .rl{ transform-origin:13px 155px !important; } .doortile .fr{ transform-origin:97px 104px !important; } .doortile .rr{ transform-origin:97px 155px !important; }
+.doortile .hood.open{ transform:translateY(-9px); } .doortile .trunk.open{ transform:translateY(9px); }
+.doortile svg{ width:2.9rem !important; height:7.4rem !important; }
+.doortile.big svg{ width:6rem !important; height:15.3rem !important; }
+.topcar{ width:5.2rem !important; height:13.3rem !important; }
+#g-fl{ transform-origin:13px 104px; } #g-rl{ transform-origin:13px 155px; } #g-fr{ transform-origin:97px 104px; } #g-rr{ transform-origin:97px 155px; }
+.topcar .door.l.open{ transform:rotate(52deg) !important; } .topcar .door.r.open{ transform:rotate(-52deg) !important; }
+#g-hood.open{ transform:translateY(-8px); } #g-trunk.open{ transform:translateY(8px); }
+.topcar .part{ transition:transform .5s cubic-bezier(.2,.9,.3,1.2), fill .2s !important; }
+
+/* ===== v22 : mode clair ===== */
+:root[data-look=light]{
+  --text:#15181d; --dim:rgba(21,24,29,.62); --faint:rgba(21,24,29,.4); --line:rgba(0,0,0,.1);
+  --card-rgb:255,255,255; --card-op:.8; --b1:#ffffff; --b2:#d3d8df; --b3:#aeb5bf;
+  --tile:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.7)); --tile-ring:inset 0 0 0 1px rgba(0,0,0,.08);
+}
+:root[data-look=light] body, :root[data-look=light] html{ background:#dfe3e8 !important; }
+:root[data-look=light] .scene .bg{ background:
+  radial-gradient(44% 12% at 50% 61%, rgba(255,255,255,.7), rgba(255,255,255,0) 72%),
+  linear-gradient(180deg,#f4f6f9 0%,#e9edf2 45%,#e2e6ec 57%,#d6dbe2 59.5%,#c9cfd7 68%,#b9c0ca 88%,#aab2bd 100%) !important; }
+:root[data-look=light] .panel, :root[data-look=light] #app{ color:var(--text); }
+:root[data-look=light] .card, :root[data-look=light] .np, :root[data-look=light] .dock, :root[data-look=light] .hud{ background:rgba(255,255,255,.78) !important; box-shadow:0 0 0 1px rgba(0,0,0,.07), 0 .8rem 2rem rgba(30,40,60,.1) !important; color:var(--text); }
+:root[data-look=light] .srow, :root[data-look=light] .side{ background:rgba(255,255,255,.72) !important; color:var(--text); }
+:root[data-look=light] .seg{ background:rgba(0,0,0,.07) !important; } :root[data-look=light] .seg button{ color:#3a4048; } :root[data-look=light] .seg button.on{ background:#fff !important; color:#111 !important; box-shadow:0 1px 4px rgba(0,0,0,.18); }
+:root[data-look=light] .pill{ background:rgba(0,0,0,.07); color:#15181d; } :root[data-look=light] .pill.pri, :root[data-look=light] .go{ background:var(--accent); color:#fff; }
+:root[data-look=light] .sitem{ color:#2a2f36; } :root[data-look=light] .sitem.on{ background:rgba(0,0,0,.08) !important; }
+:root[data-look=light] .bgf{ background:linear-gradient(#f3f5f8,#e6e9ee) !important; box-shadow:inset 0 0 0 1px rgba(0,0,0,.08) !important; }
+:root[data-look=light] .bga, :root[data-look=light] .bgb{ color:#15181d !important; }
+:root[data-look=light] .bl, :root[data-look=light] .bv{ color:#15181d !important; }
+:root[data-look=light] .bt{ background:repeating-linear-gradient(135deg, rgba(0,0,0,.06) 0 2px, transparent 2px 6px) !important; box-shadow:0 .55rem 0 -.3rem rgba(0,0,0,.25) !important; }
+:root[data-look=light] .dbtn i, :root[data-look=light] .app i{ background:var(--tile); box-shadow:var(--tile-ring); color:#15181d; }
+:root[data-look=light] .dbtn, :root[data-look=light] .app span, :root[data-look=light] .app b{ color:#15181d; }
+:root[data-look=light] .iconbtn, :root[data-look=light] .tbtn{ background:rgba(255,255,255,.85); color:#15181d; }
+:root[data-look=light] .doortile .b, :root[data-look=light] .topcar .body{ stroke:rgba(0,0,0,.45) !important; fill:rgba(0,0,0,.08) !important; }
+:root[data-look=light] .doortile .wh, :root[data-look=light] .topcar .wheel{ fill:rgba(0,0,0,.4) !important; }
+:root[data-look=light] .doortile .pt, :root[data-look=light] .doortile .dr, :root[data-look=light] .topcar .part{ fill:rgba(0,0,0,.08); stroke:rgba(0,0,0,.35); }
+:root[data-look=light] .hshadow{ opacity:.6; }
+:root[data-look=light] .platter::before{ background:#9ea6b2 !important; } :root[data-look=light] .platter::after{ background:radial-gradient(#cfd5de,#aeb6c2) !important; border-color:rgba(0,0,0,.12) !important; }
+/* ===== fond d'écran ===== */
+:root[data-wp=on] .scene .bg{ background:linear-gradient(rgba(10,12,16,.38),rgba(10,12,16,.38)), var(--wp) center/cover no-repeat !important; }
+:root[data-wp=on][data-look=light] .scene .bg{ background:linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.28)), var(--wp) center/cover no-repeat !important; }
+#wpsheet{ position:absolute; top:0;right:0;bottom:0;left:0; z-index:95; display:grid; place-items:center; background:rgba(6,7,9,.6); opacity:0; transition:opacity .2s; }
+#wpsheet.on{ opacity:1; } #wpsheet[hidden]{ display:none; }
+.wpcard{ width:66rem; max-height:84%; padding:2rem; border-radius:1.8rem; background:#23262c; color:#f4f5f7; overflow:auto; }
+:root[data-look=light] .wpcard{ background:#f4f6f9; color:#15181d; }
+.wpcard h3{ font-size:1.8rem; margin:0 0 .4rem; } .wpcard .pw-t{ opacity:.65; margin:0 0 1.4rem; font-size:.95rem; }
+.wpg{ display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.4rem; }
+.wpc{ position:relative; aspect-ratio:16/10; border-radius:1rem; border:2px solid transparent; background:#343842 center/cover; color:#fff; display:grid; place-items:center; font-size:.9rem; }
+.wpc.on{ border-color:var(--accent); } .wpc.add{ background:rgba(128,128,128,.25); } .wpc span{ text-shadow:0 1px 4px rgba(0,0,0,.6); }
+:root[data-look=light] .vlogo{ filter:invert(1) brightness(.2); }
+:root[data-look=light] .wx-ic, :root[data-look=light] .wx .ic, :root[data-look=light] .hw .ic, :root[data-look=light] .dbtn .ic, :root[data-look=light] .quick .ic, :root[data-look=light] .app .ic, :root[data-look=light] #bellBtn .ic, :root[data-look=light] .sysicons .ic, :root[data-look=light] .row .ic, :root[data-look=light] .chip .ic, :root[data-look=light] .sitem .ic, :root[data-look=light] .pill .ic, :root[data-look=light] .bga .ic, :root[data-look=light] .bgb .ic, :root[data-look=light] .iconbtn .ic{ color:#15181d !important; }
+:root[data-look=light] .dock .dbtn[data-go=monitor] i .ic{ color:#15181d !important; }
+:root[data-look=light] .dbtn[aria-selected=true] i .ic{ color:#fff !important; }
+:root[data-look=light] .wx *{ color:inherit; } :root[data-look=light] .wx-cities button{ color:#2a2f36; } :root[data-look=light] .wx-cities button.on{ color:#fff !important; }
+:root[data-look=light] .chip b{ color:#15181d; } :root[data-look=light] .wx-h, :root[data-look=light] .wx-hr div{ background:rgba(0,0,0,.05) !important; }
+:root[data-look=light] .dim{ background:rgba(232,236,241,.86) !important; }
+:root[data-look=light] .rng::-webkit-slider-runnable-track{ background:rgba(0,0,0,.18); }
+:root[data-look=light] .panel{ background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.35)) !important; }
+:root[data-look=light] #view-settings, :root[data-look=light] .panel .smain{ background:transparent !important; }
+:root[data-look=light] .doortile .dtxt b, :root[data-look=light] .doortile .dtxt span{ color:var(--text); }
+:root[data-look=light] #radarFx.compact{ background:rgba(255,255,255,.85) !important; } :root[data-look=light] .rrad .car{ fill:#5c6470; }
+:root[data-look=light] .wpc.add{ color:#15181d; text-shadow:none; }
+/* écran partagé (une seule appli) : lecteur compact pour que rien ne déborde */
+#view-split.solo .pchip, #view-split.solo .pstats{ display:none; }
+#view-split.solo .pfull{ gap:2.6rem; padding:0 2.4rem 1.2rem; }
+#view-split.solo .cover.xl{ width:min(21rem,38vh); height:min(21rem,38vh); flex:none; }
+#view-split.solo .pinfo{ max-width:32rem; }
+/* la voiture ne doit jamais transparaître hors accueil/véhicule (visibility enfant > parent) */
+#app:not([data-view=home]):not([data-view=vehicle]) .hero,
+#app:not([data-view=home]):not([data-view=vehicle]) .hero *{ visibility:hidden !important; }
+/* chrono : vitesse en direct dans l'anneau */
+.chr .rspd{ position:absolute; left:0; right:0; top:2.6rem; text-align:center; font-size:1.5rem; color:var(--dim,#9aa3ae); letter-spacing:.02em; }
+.chr .rspd b{ font-size:2.6rem; color:#fff; font-weight:600; font-variant-numeric:tabular-nums; margin-right:.3rem; }
+:root[data-look=light] .chr .rspd b{ color:#111; }
+
+/* ===== Accueil sans voiture ===== */
+:root[data-nocar="1"] .hero{ display:none !important; }
+.hnp{ position:absolute; z-index:6; left:50%; top:6.4rem; width:33rem; height:23.5rem; margin-left:-16.5rem; display:flex; align-items:center; justify-content:center; }
+.hnp[hidden]{ display:none; }
+.hnp .mm, .hnp .pfull{ width:100%; height:100%; }
+.hnp .mm{ justify-content:center; gap:.9rem; }
+.hnp .mm-favs{ display:none; }
+.hnp .mm-f b{ font-size:6rem; } .hnp .mm-n{ font-size:1.5rem; }
+.hnp .ctl button{ width:3.8rem; height:3.8rem; } .hnp .ctl .big{ width:4.8rem; height:4.8rem; }
+.hnp .pfull{ flex-direction:column; align-items:center; justify-content:center; gap:1.2rem; padding:0; text-align:center; }
+.hnp .pchip, .hnp .pstats, .hnp .upnext{ display:none; }
+.hnp .cover.xl{ width:9.5rem; height:9.5rem; flex:none; }
+.hnp .pinfo{ width:100%; display:flex; flex-direction:column; align-items:center; gap:.5rem; }
+.hnp .pinfo h2{ font-size:2rem; } .hnp .prog{ width:100%; }
+
+/* ===== Liquid Glass (réglable : --lg-a opacité, --lg-blur, --lg-sat, --lg-edge ; réfraction via lgRef) ===== */
+:root{ --lg-a:.14; --lg-blur:10px; --lg-sat:1.7; --lg-edge:.55; }
+:root[data-glass=liquid] .card, :root[data-glass=liquid] .dock, :root[data-glass=liquid] .island,
+:root[data-glass=liquid] .np, :root[data-glass=liquid] .sheet-box{
+  background:linear-gradient(135deg, rgba(255,255,255,calc(var(--lg-a)*1.15)), rgba(255,255,255,calc(var(--lg-a)*.3)) 45%, rgba(255,255,255,calc(var(--lg-a)*.65)));
+  backdrop-filter:url(#lgRefract) blur(var(--lg-blur)) saturate(var(--lg-sat)) brightness(1.08);
+  -webkit-backdrop-filter:url(#lgRefract) blur(var(--lg-blur)) saturate(var(--lg-sat)) brightness(1.08);
+  border:1px solid rgba(255,255,255,calc(var(--lg-edge)*.5)); border-top-color:rgba(255,255,255,var(--lg-edge)); border-left-color:rgba(255,255,255,calc(var(--lg-edge)*.75));
+  box-shadow:inset 0 1px 1px rgba(255,255,255,var(--lg-edge)), inset 0 -1px 1px rgba(255,255,255,calc(var(--lg-edge)*.2)), inset 0 0 22px rgba(255,255,255,calc(var(--lg-a)*.5)), 0 10px 34px rgba(0,0,0,.28);
+}
+:root[data-glass=liquid][data-look=light] .card, :root[data-glass=liquid][data-look=light] .dock, :root[data-glass=liquid][data-look=light] .island,
+:root[data-glass=liquid][data-look=light] .np, :root[data-glass=liquid][data-look=light] .sheet-box{
+  background:linear-gradient(135deg, rgba(255,255,255,calc(var(--lg-a)*3.6)), rgba(255,255,255,calc(var(--lg-a)*1.4)) 50%, rgba(255,255,255,calc(var(--lg-a)*2.6))) !important;
+  border-color:rgba(255,255,255,.75); box-shadow:inset 0 1px 1px #fff, inset 0 0 20px rgba(255,255,255,.35), 0 10px 30px rgba(20,30,60,.16);
+}
+:root[data-glass=liquid] .card .card, :root[data-glass=liquid] .pane.card{ backdrop-filter:blur(8px) saturate(1.5); -webkit-backdrop-filter:blur(8px) saturate(1.5); }
+#lgSvg{ position:absolute; width:0; height:0; pointer-events:none; }
+/* le lecteur central remplace la carte « En lecture » sur l’accueil ; l’îlot reste visible sur les autres pages */
+:root[data-bignp="1"] #np{ display:none !important; }
+.hnp .cover.xl{ width:8rem; height:8rem; } .hnp .pfull{ gap:.7rem; }
+
+/* réduit le lecteur central + autres contenus du centre */
+.hnp{ height:21rem; top:6.8rem; }
+.hnp .mm-f b{ font-size:4.6rem; } .hnp .mm-n{ font-size:1.2rem; }
+.hnp .ctl button{ width:3.2rem; height:3.2rem; } .hnp .ctl .big{ width:4rem; height:4rem; }
+.hnp .cover.xl{ width:6.5rem; height:6.5rem; } .hnp .pinfo h2{ font-size:1.5rem; } .hnp .pinfo p{ font-size:.95rem; }
+.hnp .pfull{ gap:.5rem; } .hnp .prog{ width:80%; } .hnp .times{ width:80%; }
+:root[data-centre=speed] #hud, :root[data-centre=clock] #hud{ display:none; }
+.bigspd{ text-align:center; } .bigspd b{ font-size:9rem; font-weight:600; line-height:1; letter-spacing:-.04em; font-variant-numeric:tabular-nums; }
+.bigspd small{ display:block; font-size:1.2rem; color:var(--dim,#9aa3ae); margin-top:.2rem; }
+.bigspd .bs2{ margin-top:1rem; } .bigspd .bs2 b{ font-size:2.4rem; letter-spacing:0; }
+.bigclk{ text-align:center; } .bigclk b{ font-size:8rem; font-weight:600; line-height:1; letter-spacing:-.04em; } .bigclk small{ display:block; font-size:1.3rem; color:var(--dim,#9aa3ae); text-transform:capitalize; margin-top:.4rem; }
+.wpx{ position:absolute; top:.4rem; right:.4rem; width:1.7rem; height:1.7rem; border-radius:50%; background:rgba(0,0,0,.6); color:#fff; display:grid; place-items:center; font-style:normal; font-size:1.1rem; line-height:1; }
+#ctrsheet{ position:absolute; top:0;right:0;bottom:0;left:0; z-index:95; display:grid; place-items:center; background:rgba(6,7,9,.55); opacity:0; transition:opacity .2s; }
+#ctrsheet.on{ opacity:1; } #ctrsheet[hidden]{ display:none; }
+.ctrcard{ width:44rem; } .ctrg{ display:grid; grid-template-columns:repeat(5,1fr); gap:.8rem; }
+.ctrb{ padding:1.5rem .4rem; border-radius:1.1rem; border:2px solid transparent; background:rgba(128,128,128,.22); color:inherit; font-size:1.05rem; font-weight:600; }
+.ctrb.on{ border-color:var(--accent); }
+
+:root[data-logo="0"] #vname{ display:none; }
+.bigeng{ display:grid; grid-template-columns:1fr 1fr; gap:1rem 3rem; text-align:center; }
+.bigeng small{ display:block; font-size:1rem; color:var(--dim,#9aa3ae); } .bigeng b{ font-size:3.4rem; font-weight:600; font-variant-numeric:tabular-nums; } .bigeng em{ font-style:normal; margin-left:.3rem; color:var(--dim,#9aa3ae); }
+.bigwx{ text-align:center; } .bigwx b{ font-size:8rem; font-weight:300; line-height:1; } .bigwx span{ display:block; font-size:1.8rem; margin-top:.3rem; } .bigwx small{ display:block; font-size:1rem; color:var(--dim,#9aa3ae); margin-top:.5rem; }

@@ -1,0 +1,18 @@
+/* Police embarquée (Inter, licence OFL) : même rendu sur l'autoradio et sur PC */
+@font-face{ font-family:"M6 Inter"; font-weight:400; font-style:normal; font-display:swap; src:url(../assets/fonts/Inter-Regular.woff) format("woff"); }
+@font-face{ font-family:"M6 Inter"; font-weight:500; font-style:normal; font-display:swap; src:url(../assets/fonts/Inter-Medium.woff) format("woff"); }
+@font-face{ font-family:"M6 Inter"; font-weight:600; font-style:normal; font-display:swap; src:url(../assets/fonts/Inter-SemiBold.woff) format("woff"); }
+@font-face{ font-family:"M6 Inter"; font-weight:700; font-style:normal; font-display:swap; src:url(../assets/fonts/Inter-SemiBold.woff) format("woff"); }
+@font-face{ font-family:"M6 Display"; font-weight:300; font-style:normal; font-display:swap; src:url(../assets/fonts/InterDisplay-Light.woff) format("woff"); }
+@font-face{ font-family:"M6 Display"; font-weight:500; font-style:normal; font-display:swap; src:url(../assets/fonts/InterDisplay-Medium.woff) format("woff"); }
+:root{ --f:"M6 Inter",Inter,Roboto,"Segoe UI",system-ui,sans-serif; --fd:"M6 Display","M6 Inter",Inter,Roboto,sans-serif; }
+html,body,button,input{ font-family:var(--f); font-feature-settings:"calt","kern","cv11"; -webkit-font-smoothing:antialiased; }
+#clock,.wx-main b,.odo b,.bgv,.rv b,.ring b{ font-family:var(--fd); font-feature-settings:"tnum"; }
+#clock{ font-weight:500; letter-spacing:-.025em; }
+.wx-main b{ font-weight:300; }
+/* Nom du véhicule : Poppins italique (licence OFL), réduite aux majuscules et aux chiffres */
+@font-face{ font-family:"P208 Word"; font-weight:500; font-style:normal; font-display:block; src:url(../assets/fonts/Poppins-MediumItalic-sub.woff) format("woff"); }
+@font-face{ font-family:"P208 Word"; font-weight:700; font-style:normal; font-display:block; src:url(../assets/fonts/Poppins-BoldItalic-sub.woff) format("woff"); }
+@font-face{ font-family:"P208 Word"; font-weight:800; font-style:normal; font-display:block; src:url(../assets/fonts/Poppins-Bold-sub.woff) format("woff"); }
+/* « 208 » de l'animation de démarrage : Inter Display très fine italique (licence OFL), chiffres seulement */
+@font-face{ font-family:"P208 Num"; font-weight:200; font-style:normal; font-display:block; src:url(../assets/fonts/InterDisplay-ExtraLightItalic-num.woff) format("woff"); }

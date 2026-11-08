@@ -1,0 +1,87 @@
+/* =========================================================
+   v7 — refonte visuelle : graphite + bleu, icônes unies
+   ========================================================= */
+:root{
+  --accent:#3d8bff; --on-accent:#fff;
+  --text:#f4f5f7; --dim:rgba(244,245,247,.62); --faint:rgba(244,245,247,.38);
+  --card-rgb:30,32,37; --card-op:.74;
+  --line:rgba(255,255,255,.08);
+  --tile:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.06));
+  --tile-ring:inset 0 0 0 1px rgba(255,255,255,.11);
+}
+[data-theme=night]{ --card-rgb:15,16,19; --card-op:.8; }
+[data-accent=blue]{ --accent:#4f8cff; }
+html{ background:#0b0c0f; }
+
+/* --- Fond : mur + sol (horizon) pour que la voiture soit posée, pas flottante --- */
+.scene .bg{ background:
+  radial-gradient(44% 12% at 50% 61%, rgba(255,255,255,.12), rgba(255,255,255,0) 72%),
+  radial-gradient(70% 60% at 50% 30%, rgba(255,255,255,.07), rgba(255,255,255,0) 70%),
+  linear-gradient(180deg, #2c3036 0%, #383d45 45%, #3f444c 57%, #4e545d 59.5%, #3b4047 68%, #25282d 88%, #181a1e 100%); }
+[data-theme=night] .scene .bg{ background:
+  radial-gradient(46% 15% at 50% 57%, rgba(255,255,255,.05), rgba(255,255,255,0) 72%),
+  linear-gradient(180deg, #0d0e11 0%, #121317 45%, #15161a 57%, #1c1d22 59.5%, #121317 68%, #08090a 88%, #040405 100%); }
+.spot{ display:none; }
+.dim{ background:rgba(6,7,9,.72); }
+
+/* --- Cartes --- */
+.card,.dock{ box-shadow:inset 0 0 0 1px rgba(255,255,255,.07); }
+
+/* --- Icônes : vrais pictogrammes pleins, une seule couleur --- */
+svg.ic{ fill:currentColor; stroke:none; }
+.dbtn i,.app i,.quick i,.pgeneric i,.sic,.srow3 .sq,.emp-ic,.mt-ic{
+  background:var(--tile) !important; box-shadow:var(--tile-ring) !important; color:#eef0f3 !important; }
+.dbtn .ic,.app .ic,.quick .ic{ width:2.1rem; height:2.1rem; }
+.pgeneric .ic{ width:3rem; height:3rem; } .sic .ic{ width:1.3rem; height:1.3rem; }
+.srow3 .sq .ic{ width:1.7rem; height:1.7rem; } .emp-ic .ic{ width:5rem; height:5rem; }
+.mt-ic .ic{ width:1.6rem; height:1.6rem; }
+.dbtn[aria-selected=true] i,.app.cur i{ background:var(--accent) !important; box-shadow:none !important; color:#fff !important; }
+.dbtn span,.quick span{ color:var(--dim); font-weight:500; }
+.app span{ font-weight:500; }
+.dbtn:active i,.app:active i,.quick button:active i{ transform:scale(.94); }
+.app i img,.pgeneric i img,.sic img{ border-radius:inherit; width:100%; height:100%; object-fit:cover; }
+
+/* --- Barre du haut --- */
+.home-btn,.gear-btn{ box-shadow:var(--tile-ring); }
+.gear-btn .ic,.home-btn .ic{ width:1.5rem; height:1.5rem; }
+
+/* --- Voiture : centrée, ombre au sol propre --- */
+.hero{ top:5.4rem; width:57rem; height:25.2rem; margin-left:-28.5rem; }
+.hshadow{ display:none; left:12%; right:12%; bottom:1%; height:8%;
+  background:radial-gradient(closest-side, rgba(0,0,0,.55), rgba(0,0,0,.18) 60%, rgba(0,0,0,0)); }
+[data-theme=night] .hshadow{ background:radial-gradient(closest-side, rgba(0,0,0,.7), rgba(0,0,0,.25) 60%, rgba(0,0,0,0)); }
+
+/* --- Nom du véhicule (texte, centré) --- */
+.vtitle{ left:50%; transform:translateX(-50%); }
+.vtitle>div{ display:flex; justify-content:center; }
+.vlogo{ height:1.75rem; margin:0; opacity:1; }
+
+.wx-ic{ color:#f4f5f7; opacity:1; }
+.v.mt-soon{ color:#ffb340; }
+
+/* --- Démarrage : logo net, entier (aucun zoom/rognage), sans animation en boucle --- */
+.bootfx{ width:min(40rem,84vw); }
+.bootfx img{ width:100%; height:auto; max-width:none; clip-path:none !important; transform:none !important;
+  opacity:0; animation:bootFade 1.3s .3s ease-out forwards !important; image-rendering:auto; }
+.bootfx .shine{ top:0;right:0;bottom:0;left:0; }
+.bootfx::before{ width:90%; animation:bootHalo 2.2s .4s ease-out forwards; }
+@keyframes bootFade{ from{ opacity:0; } to{ opacity:1; } }
+/* « PEUGEOT 208 PERFORMANCE » : italique, bandes de course inclinées, entrée animée une fois */
+.vtitle{ top:.55rem !important; gap:.7rem !important; }
+.vtitle .vlogo{ height:2.9rem !important; }
+.vword{ display:grid; grid-template-columns:auto auto; align-items:baseline; column-gap:.6rem; row-gap:.12rem; line-height:1; font-family:"P208 Word",var(--f); }
+.vword small{ font-size:.95rem; font-weight:500; letter-spacing:.34em; color:var(--dim); justify-self:end; }
+.vword b{ font-size:2.6rem; font-weight:700; letter-spacing:-.015em; }
+.vword em{ grid-column:1 / 3; justify-self:end; display:flex; align-items:center; gap:.18rem; font-style:normal; }
+.vword em i{ display:block; width:.55rem; height:.62rem; background:var(--accent); transform:skewX(-24deg); opacity:.9; }
+.vword em i:nth-child(2){ opacity:.6; } .vword em i:nth-child(3){ opacity:.35; margin-right:.35rem; }
+.vword em span{ font-size:.82rem; font-weight:800; letter-spacing:.3em; margin-right:-.3em; color:var(--accent); transform:skewX(-10deg); display:block; }
+/* entrée : une seule fois au démarrage (transform/opacity) */
+.vword small,.vword b,.vword em{ animation:vwIn .8s cubic-bezier(.16,1,.3,1) both; }
+.vword small{ animation-delay:.15s; } .vword b{ animation-delay:.25s; } .vword em{ animation-delay:.45s; animation-name:vwIn2; }
+@keyframes vwIn{ from{ opacity:0; transform:translateX(2.4rem) skewX(-12deg); } to{ opacity:1; transform:none; } }
+@keyframes vwIn2{ from{ opacity:0; transform:translateX(-2.4rem); } to{ opacity:1; transform:none; } }
+[data-anim=reduced] .vword small,[data-anim=reduced] .vword b,[data-anim=reduced] .vword em{ animation:none; }
+.bootfx .bword{ font-family:"P208 Word",var(--f); }
+.bootfx .bword small{ font-weight:500; letter-spacing:.8rem; }
+.bootfx .bword b{ font-weight:700; letter-spacing:-.01em; }

@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="fr" data-theme="day" data-lights="off" data-anim="full" data-glass="off" data-accent="auto" data-car="silver">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>Peugeot 208 · Launcher</title>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/extras.css">
+<link rel="stylesheet" href="css/apple.css">
+<link rel="stylesheet" href="css/shell.css">
+<link rel="stylesheet" href="css/v6.css">
+<link rel="stylesheet" href="css/v7.css">
+<link rel="stylesheet" href="css/np.css">
+<link rel="stylesheet" href="css/v8.css">
+<link rel="stylesheet" href="css/island.css">
+<link rel="stylesheet" href="css/boot208.css">
+<link rel="stylesheet" href="css/fix208.css">
+</head>
+<body>
+
+<!-- ============ Sprite d'icônes + formes réutilisées ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M21 19v1H3v-1l2-2v-6c0-3.1 2.03-5.83 5-6.71V4a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.29c2.97.88 5 3.61 5 6.71v6zm-7 2a2 2 0 0 1-2 2 2 2 0 0 1-2-2"/></symbol>
+    <symbol id="i-wifi2" viewBox="0 0 24 24"><path d="m12 21 3.6-4.8c-1-.75-2.25-1.2-3.6-1.2s-2.6.45-3.6 1.2zm0-18C7.95 3 4.21 4.34 1.2 6.6L3 9c2.5-1.88 5.62-3 9-3s6.5 1.12 9 3l1.8-2.4C19.79 4.34 16.05 3 12 3m0 6c-2.7 0-5.19.89-7.2 2.4l1.8 2.4C8.1 12.67 9.97 12 12 12s3.9.67 5.4 1.8l1.8-2.4C17.19 9.89 14.7 9 12 9"/></symbol>
+    <symbol id="i-moon2" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.45 4.73L5.82 21z"/></symbol>
+    <symbol id="i-usb" viewBox="0 0 24 24"><path d="M15 7v4h1v2h-3V5h2l-3-4-3 4h2v8H8v-2.07c.7-.37 1.2-1.08 1.2-1.93A2.2 2.2 0 0 0 7 6.8c-1.22 0-2.2.98-2.2 2.2 0 .85.5 1.56 1.2 1.93V13a2 2 0 0 0 2 2h3v3.05c-.71.36-1.2 1.1-1.2 1.95a2.2 2.2 0 0 0 2.2 2.2 2.2 2.2 0 0 0 2.2-2.2c0-.85-.49-1.59-1.2-1.95V15h3a2 2 0 0 0 2-2v-2h1V7z"/></symbol>
+    <symbol id="i-aux" viewBox="0 0 24 24"><path d="M11 4V3c0-.55.45-1 1-1s1 .45 1 1v1zm2 5V5h-2v4H9v6c0 1.3.84 2.4 2 2.82V22h2v-4.18c1.16-.42 2-1.52 2-2.82V9z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M12 16a3 3 0 0 1-3-3c0-1.12.61-2.1 1.5-2.61l9.71-5.62-5.53 9.58c-.5.98-1.51 1.65-2.68 1.65m0-13c1.81 0 3.5.5 4.97 1.32l-2.1 1.21C14 5.19 13 5 12 5a8 8 0 0 0-8 8c0 2.21.89 4.21 2.34 5.65h.01c.39.39.39 1.02 0 1.41s-1.03.39-1.42.01A9.97 9.97 0 0 1 2 13 10 10 0 0 1 12 3m10 10c0 2.76-1.12 5.26-2.93 7.07-.39.38-1.02.38-1.41-.01a.996.996 0 0 1 0-1.41A7.95 7.95 0 0 0 20 13c0-1-.19-2-.54-2.9L20.67 8C21.5 9.5 22 11.18 22 13"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97s-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1s.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><path d="M3 11h8V3H3m0 18h8v-8H3m10 8h8v-8h-8m0-10v8h8V3"/></symbol>
+    <symbol id="i-oil" viewBox="0 0 24 24"><path d="M22 12.5s2 2.17 2 3.5a2 2 0 0 1-2 2 2 2 0 0 1-2-2c0-1.33 2-3.5 2-3.5M6 6h4a1 1 0 0 1 1 1 1 1 0 0 1-1 1H9v2h2c.74 0 1.39.4 1.73 1l6.51-3.76 3.26 1.89c.5.27.64.87.37 1.37-.28.47-.87.64-1.37.36l-2.1-1.21-3.65 6.32c-.34.61-1 1.03-1.75 1.03H5a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h2V8H6a1 1 0 0 1-1-1 1 1 0 0 1 1-1m-1 6v3h9l2.06-3.57-3.46 2-.91-1.43zM.38 9.21 2.09 7.5c.41-.39 1.02-.39 1.41 0s.39 1 0 1.41l-1.71 1.71c-.39.38-1.02.38-1.41 0C0 10.23 0 9.6.38 9.21"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M6 13h12v-2H6M3 6v2h18V6M10 18h4v-2h-4z"/></symbol>
+    <symbol id="i-air" viewBox="0 0 24 24"><path d="M19 18.31V20a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3.7c-.46-.18-1.05-.3-2-.3a1 1 0 0 1-1-1 1 1 0 0 1 1-1c.82 0 1.47.08 2 .21V12.3c-.46-.18-1.05-.3-2-.3a1 1 0 0 1-1-1 1 1 0 0 1 1-1c.82 0 1.47.08 2 .21V8.3C4.54 8.12 3.95 8 3 8a1 1 0 0 1-1-1 1 1 0 0 1 1-1c.82 0 1.47.08 2 .21V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v2.16c1.78.31 2.54.97 2.71 1.13.39.39.39 1.03 0 1.42s-.91.38-1.42 0c0 0-1.04-.71-3.29-.71-1.26 0-2.09.41-3.05.9-1.04.51-2.21 1.1-3.95 1.1-.36 0-.69 0-1-.04V7.95c.3.05.63.05 1 .05 1.26 0 2.09-.41 3.05-.89C14.09 6.59 15.27 6 17 6V4H7v16h10v-2c1.5 0 1.97.29 2 .31M17 10c-1.73 0-2.91.59-3.95 1.11-.96.48-1.79.89-3.05.89-.37 0-.7 0-1-.05v2.01c.31.04.64.04 1 .04 1.74 0 2.91-.59 3.95-1.1.96-.48 1.79-.9 3.05-.9 2.25 0 3.29.71 3.29.71.51.39 1.03.39 1.42 0s.39-1.02 0-1.42C21.5 11.08 20.25 10 17 10m0 4c-1.73 0-2.91.59-3.95 1.11-.96.48-1.79.89-3.05.89-.37 0-.7 0-1-.05v2.01c.31.04.64.04 1 .04 1.74 0 2.91-.59 3.95-1.1.96-.48 1.79-.9 3.05-.9 2.25 0 3.29.71 3.29.71.51.39 1.03.39 1.42 0s.39-1.02 0-1.42C21.5 15.08 20.25 14 17 14"/></symbol>
+    <symbol id="i-brake" viewBox="0 0 24 24"><path d="M24 12c0 3.31-1.34 6.31-3.5 8.5l-1.08-1.08c1.9-1.92 3.08-4.52 3.08-7.42 0-2.89-1.18-5.5-3.08-7.42L20.5 3.5C22.66 5.69 24 8.69 24 12m-4-2.4V8h-3.2c-.88 0-1.6.72-1.6 1.6v1.6a1.6 1.6 0 0 0 1.6 1.6h1.6v1.6h-3.2V16h3.2c.88 0 1.6-.72 1.6-1.6v-1.6a1.6 1.6 0 0 0-1.6-1.6h-1.6V9.6zM8.42 6c1.05-.63 2.27-1 3.58-1s2.53.37 3.58 1h3.11C17.05 4.16 14.66 3 12 3S6.95 4.16 5.31 6zm4.78 6c.64 0 1.2.56 1.2 1.2v1.2a1.6 1.6 0 0 1-1.6 1.6H9.6V8h3.2a1.6 1.6 0 0 1 1.6 1.6v1.2c0 .64-.56 1.2-1.2 1.2m-.4.8h-1.6v1.6h1.6zm0-3.2h-1.6v1.6h1.6zM4.58 4.58 3.5 3.5C1.34 5.69 0 8.69 0 12s1.34 6.31 3.5 8.5l1.08-1.08C2.68 17.5 1.5 14.9 1.5 12c0-2.89 1.18-5.5 3.08-7.42M7.2 16v-3.2H5.6V16H4V9.6A1.6 1.6 0 0 1 5.6 8h1.6c.88 0 1.6.72 1.6 1.6V16zm0-4.8V9.6H5.6v1.6zm8.38 6.8c-1.05.63-2.27 1-3.58 1a6.93 6.93 0 0 1-3.58-1H5.31c1.64 1.84 4.03 3 6.69 3s5.05-1.16 6.69-3z"/></symbol>
+    <symbol id="i-tire" viewBox="0 0 24 24"><path d="m19.66 9.64-.36-.94 1.86-.7c-.92-2.12-2.56-3.82-4.62-4.86l-.8 1.78-.92-.42.8-1.8C14.5 2.26 13.28 2 12 2c-1.06 0-2.08.22-3.04.5l.68 1.84-.94.36L8 2.84c-2.12.92-3.82 2.56-4.86 4.62l1.78.8-.42.92-1.8-.8C2.26 9.5 2 10.72 2 12c0 1.06.22 2.08.5 3.04l1.84-.68.36.94-1.86.7c.92 2.12 2.56 3.82 4.62 4.86l.8-1.78.92.42-.8 1.8c1.12.44 2.34.7 3.62.7 1.06 0 2.08-.22 3.04-.5l-.68-1.84.94-.36.7 1.86c2.12-.92 3.82-2.56 4.86-4.62l-1.78-.8.42-.92 1.8.8c.44-1.12.7-2.34.7-3.62 0-1.06-.22-2.08-.5-3.04zm-5.36 7.9c-3.06 1.26-6.58-.18-7.84-3.24s.18-6.58 3.24-7.84 6.58.18 7.84 3.24a5.986 5.986 0 0 1-3.24 7.84"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m10 17-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9m-6-8L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5z"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="m22.7 19-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75z"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></symbol>
+    <symbol id="i-car" viewBox="0 0 24 24"><path d="m16 6 3 4h2c1.11 0 2 .89 2 2v3h-2a3 3 0 0 1-3 3 3 3 0 0 1-3-3H9a3 3 0 0 1-3 3 3 3 0 0 1-3-3H1v-3c0-1.11.89-2 2-2l3-4zm-5.5 1.5H6.75L4.86 10h5.64zm1.5 0V10h5.14l-1.89-2.5zm-6 6A1.5 1.5 0 0 0 4.5 15 1.5 1.5 0 0 0 6 16.5 1.5 1.5 0 0 0 7.5 15 1.5 1.5 0 0 0 6 13.5m12 0a1.5 1.5 0 0 0-1.5 1.5 1.5 1.5 0 0 0 1.5 1.5 1.5 1.5 0 0 0 1.5-1.5 1.5 1.5 0 0 0-1.5-1.5"/></symbol>
+    <symbol id="i-fuel" viewBox="0 0 24 24"><path d="M18 10a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1m-6 0H6V5h6m7.77 2.23.01-.01-3.72-3.72L15 4.56l2.11 2.11C16.17 7 15.5 7.93 15.5 9a2.5 2.5 0 0 0 2.5 2.5c.36 0 .69-.08 1-.21v7.21a1 1 0 0 1-1 1 1 1 0 0 1-1-1V14a2 2 0 0 0-2-2h-1V5a2 2 0 0 0-2-2H6c-1.11 0-2 .89-2 2v16h10v-7.5h1.5v5A2.5 2.5 0 0 0 18 21a2.5 2.5 0 0 0 2.5-2.5V9c0-.69-.28-1.32-.73-1.77"/></symbol>
+    <symbol id="i-battery" viewBox="0 0 24 24"><path d="M4 3v3H1v14h22V6h-3V3h-6v3h-4V3zM3 8h18v10H3zm12 2v2h-2v2h2v2h2v-2h2v-2h-2v-2zM5 12v2h6v-2z"/></symbol>
+    <symbol id="i-thermo" viewBox="0 0 24 24"><path d="M15 13V5a3 3 0 0 0-6 0v8a5 5 0 1 0 6 0m-3-9a1 1 0 0 1 1 1v3h-2V5a1 1 0 0 1 1-1"/></symbol>
+    <symbol id="i-engine" viewBox="0 0 24 24"><path d="M7 4v2h3v2H7l-2 2v3H3v-3H1v8h2v-3h2v3h3l2 2h8v-4h2v3h3V9h-3v3h-2V8h-6V6h3V4z"/></symbol>
+    <symbol id="i-light" viewBox="0 0 24 24"><path d="M13 4.8c-4 0-4 14.4 0 14.4s9-2.7 9-7.2-5-7.2-9-7.2m.1 12.4C12.7 16.8 12 15 12 12s.7-4.8 1.1-5.2C16 6.9 20 8.7 20 12s-4 5.1-6.9 5.2M2 5h7.5c-.2.4-.5.8-.6 1.4-.1.2-.1.4-.2.6H2zm6 6H2V9h6.2c-.1.6-.1 1.3-.2 2m.7 6c.2.8.5 1.4.9 2H2.1v-2zm-.5-2H2v-2h6c.1.7.1 1.4.2 2"/></symbol>
+    <symbol id="i-bt" viewBox="0 0 24 24"><path d="M14.88 16.29 13 18.17v-3.76m0-8.58 1.88 1.88L13 9.58m4.71-1.87L12 2h-1v7.58L6.41 5 5 6.41 10.59 12 5 17.58 6.41 19 11 14.41V22h1l5.71-5.71-4.3-4.29z"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="m12 21 3.6-4.8c-1-.75-2.25-1.2-3.6-1.2s-2.6.45-3.6 1.2zm0-18C7.95 3 4.21 4.34 1.2 6.6L3 9c2.5-1.88 5.62-3 9-3s6.5 1.12 9 3l1.8-2.4C19.79 4.34 16.05 3 12 3m0 6c-2.7 0-5.19.89-7.2 2.4l1.8 2.4C8.1 12.67 9.97 12 12 12s3.9.67 5.4 1.8l1.8-2.4C17.19 9.89 14.7 9 12 9"/></symbol>
+    <symbol id="i-msg" viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2M6 9h12v2H6m8 3H6v-2h8m4-4H6V6h12"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.25 1.12.37 2.32.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02z"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24"><path d="M21 3v12.5a3.5 3.5 0 0 1-3.5 3.5 3.5 3.5 0 0 1-3.5-3.5 3.5 3.5 0 0 1 3.5-3.5c.54 0 1.05.12 1.5.34V6.47L9 8.6v8.9A3.5 3.5 0 0 1 5.5 21 3.5 3.5 0 0 1 2 17.5 3.5 3.5 0 0 1 5.5 14c.54 0 1.05.12 1.5.34V6z"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 11.5A2.5 2.5 0 0 1 9.5 9 2.5 2.5 0 0 1 12 6.5 2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7"/></symbol>
+    <symbol id="i-radio" viewBox="0 0 24 24"><path d="M20 6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8c0-.85.53-1.58 1.28-1.87L15.71 1l.76 1.83L8.83 6zm0 2H4v4h12v-2h2v2h2zM7 14a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5 5 5 0 0 0 5 5 5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8z"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><path d="m8.5 13.5 2.5 3 3.5-4.5 4.5 6H5m16 1V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></symbol>
+    <symbol id="i-screen" viewBox="0 0 24 24"><path d="M21 16H3V4h18m0-2H3c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h7v2H8v2h8v-2h-2v-2h7a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2"/></symbol>
+    <symbol id="i-nav" viewBox="0 0 24 24"><path d="M12 2 4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></symbol>
+    <symbol id="i-partly" viewBox="0 0 24 24"><path d="M12.74 5.47c2.36 1.03 3.61 3.56 3.18 5.99A6 6 0 0 1 18 16v.17a3 3 0 0 1 1-.17 3 3 0 0 1 3 3 3 3 0 0 1-3 3H6a4 4 0 0 1-4-4 4 4 0 0 1 4-4h.27C5 12.45 4.6 10.24 5.5 8.26a5.49 5.49 0 0 1 7.24-2.79m-.81 1.83c-1.77-.8-3.84.01-4.62 1.77-.46 1.02-.38 2.15.1 3.06A5.99 5.99 0 0 1 12 10c.7 0 1.38.12 2 .34a3.51 3.51 0 0 0-2.07-3.04m1.62-3.66c-.55-.24-1.1-.41-1.67-.52l2.49-1.3.9 2.89a7.7 7.7 0 0 0-1.72-1.07m-7.46.8c-.49.35-.92.75-1.29 1.19l.11-2.81 2.96.68c-.62.21-1.22.53-1.78.94M18 9.71c-.09-.59-.22-1.16-.41-1.71l2.38 1.5-2.05 2.23c.11-.65.13-1.33.08-2.02M3.04 11.3c.07.6.2 1.17.39 1.7l-2.37-1.5L3.1 9.28c-.1.65-.13 1.33-.06 2.02M19 18h-3v-2a4 4 0 0 0-4-4 4 4 0 0 0-4 4H6a2 2 0 0 0-2 2 2 2 0 0 0 2 2h13a1 1 0 0 0 1-1 1 1 0 0 0-1-1"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M6 19a5 5 0 0 1-5-5 5 5 0 0 1 5-5c1-2.35 3.3-4 6-4 3.43 0 6.24 2.66 6.5 6.03L19 11a4 4 0 0 1 4 4 4 4 0 0 1-4 4zm13-6h-2v-1a5 5 0 0 0-5-5c-2.5 0-4.55 1.82-4.94 4.19C6.73 11.07 6.37 11 6 11a3 3 0 0 0-3 3 3 3 0 0 0 3 3h13a2 2 0 0 0 2-2 2 2 0 0 0-2-2"/></symbol>
+    <symbol id="i-rain" viewBox="0 0 24 24"><path d="M9 12c.53.14.85.69.71 1.22l-1.3 4.83c-.14.54-.69.85-1.22.71a.967.967 0 0 1-.69-1.22l1.28-4.83c.14-.54.69-.85 1.22-.71m4 0c.53.14.85.69.71 1.22l-2.07 7.73c-.14.55-.69.85-1.23.71-.53-.16-.85-.69-.71-1.23l2.08-7.72c.14-.54.69-.85 1.22-.71m4 0c.53.14.85.69.71 1.22l-1.3 4.83c-.14.54-.69.85-1.22.71a.967.967 0 0 1-.69-1.22l1.28-4.83c.14-.54.69-.85 1.22-.71m0-2V9a5 5 0 0 0-5-5C9.5 4 7.45 5.82 7.06 8.19 6.73 8.07 6.37 8 6 8a3 3 0 0 0-3 3c0 1.11.6 2.08 1.5 2.6v-.01c.5.28.64.91.37 1.37-.28.47-.87.64-1.37.36v.01A4.98 4.98 0 0 1 1 11a5 5 0 0 1 5-5c1-2.35 3.3-4 6-4 3.43 0 6.24 2.66 6.5 6.03L19 8a4 4 0 0 1 4 4c0 1.5-.8 2.77-2 3.46-.5.27-1.09.11-1.37-.37-.27-.48-.13-1.09.37-1.37v.01c.6-.34 1-.99 1-1.73a2 2 0 0 0-2-2z"/></symbol>
+    <symbol id="i-storm" viewBox="0 0 24 24"><path d="M6 16a5 5 0 0 1-5-5 5 5 0 0 1 5-5c1-2.35 3.3-4 6-4 3.43 0 6.24 2.66 6.5 6.03L19 8a4 4 0 0 1 4 4 4 4 0 0 1-4 4h-1a1 1 0 0 1-1-1 1 1 0 0 1 1-1h1a2 2 0 0 0 2-2 2 2 0 0 0-2-2h-2V9a5 5 0 0 0-5-5C9.5 4 7.45 5.82 7.06 8.19 6.73 8.07 6.37 8 6 8a3 3 0 0 0-3 3 3 3 0 0 0 3 3h1a1 1 0 0 1 1 1 1 1 0 0 1-1 1zm6-5h3l-2 4h2l-3.75 7 .75-5H9.5z"/></symbol>
+    <symbol id="i-fog" viewBox="0 0 24 24"><path d="M3 15h10a1 1 0 0 1 1 1 1 1 0 0 1-1 1H3a1 1 0 0 1-1-1 1 1 0 0 1 1-1m13 0h5a1 1 0 0 1 1 1 1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1 1 1 0 0 1 1-1M1 12a5 5 0 0 1 5-5c1-2.35 3.3-4 6-4 3.43 0 6.24 2.66 6.5 6.03L19 9c2.19 0 3.97 1.76 4 4h-2a2 2 0 0 0-2-2h-2v-1a5 5 0 0 0-5-5C9.5 5 7.45 6.82 7.06 9.19 6.73 9.07 6.37 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 .17 1H1.1zm2 7h2a1 1 0 0 1 1 1 1 1 0 0 1-1 1H3a1 1 0 0 1-1-1 1 1 0 0 1 1-1m5 0h13a1 1 0 0 1 1 1 1 1 0 0 1-1 1H8a1 1 0 0 1-1-1 1 1 0 0 1 1-1"/></symbol>
+    <symbol id="i-split" viewBox="0 0 24 24"><path d="M22 17V7H6v10zm0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-6v2h2v2h-8v-2h2v-2H6c-1.11 0-2-.89-2-2V7a2 2 0 0 1 2-2zM2 3v12H0V3a2 2 0 0 1 2-2h18v2z"/></symbol>
+    <symbol id="i-swap" viewBox="0 0 24 24"><path d="m21 9-4-4v3h-7v2h7v3M7 11l-4 4 4 4v-3h7v-2H7z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.14v14l11-7z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M14 19h4V5h-4M6 19h4V5H6z"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path d="M6 18V6h2v12zm3.5-6L18 6v12z"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M16 18h2V6h-2M6 18l8.5-6L6 6z"/></symbol>
+    <symbol id="i-aa" viewBox="0 0 24 24"><path d="M12 0c-.6 0-1.11.32-1.39.8L.48 18.4a1.6 1.6 0 0 0 1.39 2.4h2l7.7-13.58.43-.77 8.13 14.35h2a1.6 1.6 0 0 0 1.39-2.4L13.39.8A1.6 1.6 0 0 0 12 0m0 7.47-9.07 16 .54.53L12 20.8l8.53 3.2.54-.53z"/></symbol>
+    <symbol id="i-spotify" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0m5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02m1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6s.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2m.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3"/></symbol>
+    <symbol id="i-waze" viewBox="0 0 24 24"><path d="M13.218 0C9.915 0 6.835 1.49 4.723 4.148c-1.515 1.913-2.31 4.272-2.31 6.706v1.739c0 .894-.62 1.738-1.862 1.813-.298.025-.547.224-.547.522-.05.82.82 2.31 2.012 3.502.82.844 1.788 1.515 2.832 2.036a3 3 0 0 0 2.955 3.528 2.966 2.966 0 0 0 2.931-2.385h2.509c.323 1.689 2.086 2.856 3.974 2.21 1.64-.546 2.36-2.409 1.763-3.924a13 13 0 0 0 1.838-1.465 10.73 10.73 0 0 0 3.18-7.65c0-2.882-1.118-5.589-3.155-7.625A10.9 10.9 0 0 0 13.218 0m0 1.217c2.558 0 4.967.994 6.78 2.807a9.53 9.53 0 0 1 2.807 6.78A9.53 9.53 0 0 1 20 17.585a9.65 9.65 0 0 1-6.78 2.807h-2.46a3.01 3.01 0 0 0-2.93-2.41 3.03 3.03 0 0 0-2.534 1.367v.024a9 9 0 0 1-2.41-1.788c-.844-.844-1.316-1.614-1.515-2.11a2.86 2.86 0 0 0 1.441-.846 2.96 2.96 0 0 0 .795-2.036v-1.789c0-2.11.696-4.197 2.012-5.861 1.863-2.385 4.62-3.726 7.6-3.726zm-2.41 5.986a1.19 1.19 0 0 0-1.191 1.192 1.19 1.19 0 0 0 1.192 1.193A1.19 1.19 0 0 0 12 8.395a1.19 1.19 0 0 0-1.192-1.192m7.204 0a1.19 1.19 0 0 0-1.192 1.192 1.19 1.19 0 0 0 1.192 1.193 1.19 1.19 0 0 0 1.192-1.193 1.19 1.19 0 0 0-1.192-1.192m-7.377 4.769a.596.596 0 0 0-.546.845 4.81 4.81 0 0 0 4.346 2.757 4.77 4.77 0 0 0 4.347-2.757.596.596 0 0 0-.547-.845h-.025a.56.56 0 0 0-.521.348 3.59 3.59 0 0 1-3.254 2.061 3.59 3.59 0 0 1-3.254-2.061.64.64 0 0 0-.546-.348"/></symbol>
+    <symbol id="i-gmaps" viewBox="0 0 24 24"><path d="M19.527 4.799c1.212 2.608.937 5.678-.405 8.173-1.101 2.047-2.744 3.74-4.098 5.614-.619.858-1.244 1.75-1.669 2.727-.141.325-.263.658-.383.992-.121.333-.224.673-.34 1.008-.109.314-.236.684-.627.687h-.007c-.466-.001-.579-.53-.695-.887-.284-.874-.581-1.713-1.019-2.525-.51-.944-1.145-1.817-1.79-2.671zM8.545 7.705l-3.959 4.707c.724 1.54 1.821 2.863 2.871 4.18q.371.465.737.936l4.984-5.925-.029.01c-1.741.601-3.691-.291-4.392-1.987a3.4 3.4 0 0 1-.209-.716c-.063-.437-.077-.761-.004-1.198zM5.492 3.149l-.003.004c-1.947 2.466-2.281 5.88-1.117 8.77l4.785-5.689-.058-.05zM14.661.436l-3.838 4.563.027-.01c1.6-.551 3.403.15 4.22 1.626.176.319.323.683.377 1.045.068.446.085.773.012 1.22l-.003.016 3.836-4.561A8.38 8.38 0 0 0 14.67.439zM9.466 5.868 14.162.285l-.047-.012A8.3 8.3 0 0 0 11.986 0a8.44 8.44 0 0 0-6.169 2.766l-.016.018z"/></symbol>
+    <symbol id="i-ytmusic" viewBox="0 0 24 24"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0m0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104m0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772M9.684 15.54V8.46L15.816 12z"/></symbol>
+    <symbol id="i-youtube" viewBox="0 0 24 24"><path d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></symbol>
+    <symbol id="i-chrome" viewBox="0 0 24 24"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0M1.931 5.47A11.94 11.94 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-5.344 9.257q.309.015.621.016c6.627 0 12-5.373 12-12 0-1.54-.29-3.011-.818-4.364zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728"/></symbol>
+    <symbol id="i-gplay" viewBox="0 0 24 24"><path d="m22.018 13.298-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594M1.337.924a1.5 1.5 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087zm12.207 10.065 3.258-3.238L3.45.195a1.47 1.47 0 0 0-.946-.179zm0 2.067-11 10.933c.298.036.612-.016.906-.183l13.324-7.54z"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 24 24"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></symbol>
+    <symbol id="i-android" viewBox="0 0 24 24"><path d="M18.44 5.559q-1.015 1.748-2.028 3.498-.055-.023-.111-.043a12.098 12.098 0 0 0-8.68.033C7.537 8.897 5.868 6.026 5.6 5.56a1 1 0 0 0-.141-.19 1.104 1.104 0 0 0-1.768 1.298c1.947 3.37-.096-.216 1.948 3.36.017.03-.495.263-1.393 1.017C2.9 12.176.452 14.772 0 18.99h24a11.7 11.7 0 0 0-.746-3.068 12.1 12.1 0 0 0-2.74-4.184 12 12 0 0 0-2.131-1.687c.66-1.122 1.312-2.256 1.965-3.385a1.11 1.11 0 0 0-.008-1.12 1.1 1.1 0 0 0-.852-.532c-.522-.054-.939.313-1.049.545m-.04 8.46c.395.593.324 1.331-.156 1.65-.48.32-1.188.1-1.582-.493s-.324-1.33.156-1.65c.473-.316 1.182-.11 1.582.494m-11.193-.492c.48.32.55 1.058.156 1.65-.394.593-1.103.815-1.584.495-.48-.32-.55-1.058-.156-1.65.4-.603 1.109-.811 1.584-.495"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"/></symbol><symbol id="i-micoff" viewBox="0 0 24 24"><path d="M19,11C19,12.19 18.66,13.3 18.1,14.28L16.87,13.05C17.14,12.43 17.3,11.74 17.3,11H19M15,11.16L9,5.18V5A3,3 0 0,1 12,2A3,3 0 0,1 15,5V11L15,11.16M4.27,3L21,19.73L19.73,21L15.54,16.81C14.77,17.27 13.91,17.58 13,17.72V21H11V17.72C7.72,17.23 5,14.41 5,11H6.7C6.7,14 9.24,16.1 12,16.1C12.81,16.1 13.6,15.91 14.28,15.58L12.82,14.11L12,14A3,3 0 0,1 9,11V10.28L3,4.27L4.27,3Z"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><path d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2m0 2v4h10V4zm0 6v2h2v-2zm4 0v2h2v-2zm4 0v2h2v-2zm-8 4v2h2v-2zm4 0v2h2v-2zm4 0v6h2v-6zm-8 4v2h2v-2zm4 0v2h2v-2z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9m0 2c-4 0-8 2-8 5v2h16v-2c0-3-4-5-8-5"/></symbol>
+    <symbol id="i-brakefl" viewBox="0 0 24 24"><path d="M1.5 12c0 2.9 1.18 5.5 3.08 7.42L3.5 20.5C1.34 18.31 0 15.31 0 12s1.34-6.31 3.5-8.5l1.08 1.08C2.68 6.5 1.5 9.11 1.5 12M21 12a9 9 0 1 1-18.001-.001A9 9 0 0 1 21 12M5 12c0 .44.05.86.12 1.28.18-.19.34-.28.66-.28.52 0 .61.21 1 .71S7.85 15 8.89 15c1.03 0 1.72-.79 2.11-1.29.26-.34.39-.53.61-.63.1-.05.22-.08.39-.08.5 0 .61.21 1 .71S14.08 15 15.11 15c1.04 0 1.72-.79 2.11-1.29s.48-.71 1-.71c.32 0 .48.09.66.28.07-.42.12-.84.12-1.28 0-3.86-3.14-7-7-7s-7 3.14-7 7m15.5-8.5-1.08 1.08C21.32 6.5 22.5 9.11 22.5 12c0 2.9-1.18 5.5-3.08 7.42l1.08 1.08c2.16-2.19 3.5-5.19 3.5-8.5s-1.34-6.31-3.5-8.5"/></symbol>
+  </defs>
+</svg>
+
+<div id="app" data-view="home">
+
+  <!-- ============ SCÈNE (décor + voiture) ============ -->
+  <div class="scene" aria-hidden="true">
+    <div class="bg"></div><div class="spot"></div>
+
+    <!-- Voiture : dessin de face générique (non affiché en version LITE). Remplacé par tes photos de la 208 dès qu'elles existent. -->
+    <div class="hero" id="hero">
+      <div class="hshadow"></div>
+      <div class="platter" id="platter"></div>
+      <img class="himg" id="carImg" alt="" draggable="false" onerror="this.remove()">
+      <img class="himg b" id="carImg2" alt="" draggable="false" onerror="this.remove()">
+      <video class="himg" id="carVid" muted loop playsinline preload="auto" disablepictureinpicture></video>
+      <div class="hglow"><i></i><i></i></div>
+      <svg viewBox="0 0 600 400" overflow="visible">
+        <defs>
+          <linearGradient id="gBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--b1)"/><stop offset=".6" style="stop-color:var(--b2)"/><stop offset="1" style="stop-color:var(--b3)"/></linearGradient>
+          <linearGradient id="gHood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--b2)"/><stop offset="1" style="stop-color:var(--b1)"/></linearGradient>
+          <linearGradient id="gGlass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a6a84"/><stop offset="1" stop-color="#1b2332"/></linearGradient>
+          <linearGradient id="gLamp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f7fb"/><stop offset="1" stop-color="#97a3b6"/></linearGradient>
+          <linearGradient id="gDark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232a36"/><stop offset="1" stop-color="#0c0f14"/></linearGradient>
+          <radialGradient id="gGlow"><stop offset="0" stop-color="#fffbe8" stop-opacity=".95"/><stop offset=".3" stop-color="#fff1c4" stop-opacity=".45"/><stop offset="1" stop-color="#ffe9b0" stop-opacity="0"/></radialGradient>
+          <radialGradient id="gPool"><stop offset="0" stop-color="#fff4cf" stop-opacity=".5"/><stop offset="1" stop-color="#ffe9b0" stop-opacity="0"/></radialGradient>
+                  </defs>
+        <ellipse cx="300" cy="372" rx="236" ry="12" fill="#000" opacity=".5"/>
+        <g class="car-lights"><ellipse cx="190" cy="374" rx="120" ry="20" fill="url(#gPool)"/><ellipse cx="410" cy="374" rx="120" ry="20" fill="url(#gPool)"/></g>
+        <rect x="94" y="296" width="40" height="76" rx="12" class="tire"/><rect x="466" y="296" width="40" height="76" rx="12" class="tire"/>
+        <path class="roof" d="M204 62C210 40 226 32 246 32H354C374 32 390 40 396 62Z"/>
+        <g>
+            <path class="body" d="M86 300C80 270 86 246 100 232H300V364H110C94 364 86 356 86 340Z"/>
+            <path class="hood" d="M112 232C118 206 130 188 152 178H300V232Z"/>
+            <path class="line" d="M214 232L234 184"/>
+            <path class="lamp" d="M92 246C96 228 118 217 152 215L238 224C246 226 248 232 246 240L240 260C190 268 130 268 100 264Z"/>
+            <circle cx="192" cy="241" r="15" class="lens"/><circle cx="192" cy="241" r="6" fill="#fff" opacity=".85"/>
+            <path d="M104 250C124 236 160 230 226 236" class="drl"/>
+            <path class="dark" d="M238 238H300V272H228Z"/>
+            <path class="chrome" d="M232 252H300M229 262H300"/>
+            <path class="dark" d="M178 292H300V346H162Z"/>
+            <path class="mesh" d="M174 306H300M170 320H300M166 334H300M232 292L226 346M262 292V346"/>
+            <rect x="106" y="298" width="44" height="40" rx="14" class="dark"/><circle cx="128" cy="318" r="12" class="fog"/>
+            <path class="a" d="M168 178L196 68C200 54 214 48 232 48H300V178Z"/>
+            <path class="pil" d="M168 178L196 68"/>
+            <ellipse cx="112" cy="166" rx="24" ry="13" class="body"/>
+          </g>
+        <g transform="translate(600 0) scale(-1 1)">
+            <path class="body" d="M86 300C80 270 86 246 100 232H300V364H110C94 364 86 356 86 340Z"/>
+            <path class="hood" d="M112 232C118 206 130 188 152 178H300V232Z"/>
+            <path class="line" d="M214 232L234 184"/>
+            <path class="lamp" d="M92 246C96 228 118 217 152 215L238 224C246 226 248 232 246 240L240 260C190 268 130 268 100 264Z"/>
+            <circle cx="192" cy="241" r="15" class="lens"/><circle cx="192" cy="241" r="6" fill="#fff" opacity=".85"/>
+            <path d="M104 250C124 236 160 230 226 236" class="drl"/>
+            <path class="dark" d="M238 238H300V272H228Z"/>
+            <path class="chrome" d="M232 252H300M229 262H300"/>
+            <path class="dark" d="M178 292H300V346H162Z"/>
+            <path class="mesh" d="M174 306H300M170 320H300M166 334H300M232 292L226 346M262 292V346"/>
+            <rect x="106" y="298" width="44" height="40" rx="14" class="dark"/><circle cx="128" cy="318" r="12" class="fog"/>
+            <path class="a" d="M168 178L196 68C200 54 214 48 232 48H300V178Z"/>
+            <path class="pil" d="M168 178L196 68"/>
+            <ellipse cx="112" cy="166" rx="24" ry="13" class="body"/>
+          </g>
+        <ellipse cx="300" cy="248" rx="15" ry="8" class="badge"/>
+        <rect x="262" y="344" width="76" height="16" rx="3" class="plate"/>
+        <g class="car-lights">
+          <circle cx="192" cy="241" r="64" fill="url(#gGlow)"/><circle cx="408" cy="241" r="64" fill="url(#gGlow)"/>
+          <circle cx="192" cy="241" r="9" fill="#fffef2"/><circle cx="408" cy="241" r="9" fill="#fffef2"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Mode photos réelles : remplace le dessin dès qu'une photo est chargée (Réglages > Écran) -->
+    <div class="photos">
+      <div class="ph-l" id="ph-day"></div><div class="ph-l" id="ph-night"></div><div class="ph-l" id="ph-lights"></div>
+      <div class="ph-tint" id="phTint"></div><div class="scrim"></div>
+    </div>
+    <div class="dim"></div>
+  </div>
+
+  <!-- ============ BARRE DU HAUT ============ -->
+  <header class="topbar">
+    <button class="home-btn card" id="homeBtn" aria-label="Accueil"><svg class="ic"><use href="#i-home"/></svg></button>
+    <div class="clockbox"><b id="clock">--:--</b><span id="date"></span><div class="tlw" id="tlw"></div></div>
+
+    <div class="vtitle v-hv">
+      <img class="vlogo" id="vlogo" src="assets/logo.webp" alt="" hidden onload="this.hidden=false" onerror="this.remove()">
+      <div><h1 id="vname" aria-label="Peugeot 208 Performance"><span class="vword"><small>PEUGEOT</small><b>208</b><em><i></i><i></i><i></i><span>PERFORMANCE</span></em></span></h1><p id="vsub" hidden></p></div>
+    </div>
+
+    <div class="sysicons">
+      <button class="gear-btn" id="bellBtn" aria-label="Notifications"><svg class="ic"><use href="#i-bell"/></svg><i class="bdg" id="bellBdg" hidden></i></button>
+      <button class="gear-btn" data-go="settings" aria-label="Réglages"><svg class="ic"><use href="#i-gear"/></svg></button>
+      <svg class="ic" id="icBt" hidden><use href="#i-bt"/></svg>
+      <svg class="ic" id="icWifi" hidden><use href="#i-wifi"/></svg>
+      <span id="outTop"></span>
+    </div>
+  </header>
+
+  <!-- ============ ACCUEIL / VÉHICULE ============ -->
+  <section class="card info v-hv" id="cardInfo">
+    <div class="row tap" id="fuelRow" role="button" tabindex="0" aria-label="Changer l'affichage carburant"><svg class="ic"><use href="#i-fuel"/></svg><span class="rl" id="lFuel">Autonomie</span><span class="v" id="vFuel">Indisponible</span></div>
+    <div class="row"><svg class="ic"><use href="#i-battery"/></svg><span class="rl">Batterie</span><span class="v" id="vBatt">Indisponible</span></div>
+    <div class="row"><svg class="ic"><use href="#i-thermo"/></svg><span class="rl">Extérieur <em class="tag" id="tagMeteo" hidden>météo</em></span><span class="v" id="vOut">Indisponible</span></div>
+    <div class="row tap" id="mtRow" data-go="maint" role="button" tabindex="0"><svg class="ic"><use href="#i-wrench"/></svg><span class="rl" id="lMt">Entretien</span><span class="v" id="vMt">—</span></div>
+    <div class="row only-veh"><svg class="ic"><use href="#i-engine"/></svg><span class="rl">Moteur</span><span class="v" id="vEng">Indisponible</span></div>
+  </section>
+
+
+  <div class="hnp v-home" id="homeNp" hidden></div>
+  <div class="np" id="np" hidden aria-label="En lecture"></div>
+  <div class="island" id="island" hidden aria-label="Média en cours"></div>
+  <div class="quick v-home" id="quick">
+    <button data-open="phone"><i style="--c1:#4ade80;--c2:#16a34a"><svg class="ic"><use href="#i-phone"/></svg></i><span>Appeler</span></button>
+    <button data-open="messages"><i style="--c1:#60a5fa;--c2:#2563eb"><svg class="ic"><use href="#i-msg"/></svg></i><span>Messages</span></button>
+  </div>
+  <section class="card wx v-home" id="cardWx" aria-label="Météo">
+    <div class="wx-cities" id="wxCities"><button data-city="joseph">Saint-Joseph</button><button data-city="pierre">Saint-Pierre</button></div>
+    <div class="wx-top">
+      <div class="wx-main"><b id="wxT">—</b><span id="wxC">Indisponible</span></div>
+      <svg class="ic wx-ic" id="wxI"><use href="#i-partly"/></svg>
+      <div class="wx-meta" id="wxM"></div>
+    </div>
+    <div class="wx-h" id="wxH"></div>
+  </section>
+
+  <section class="card phone v-home" id="cardPhone" aria-label="Téléphone" data-st="none">
+    <div class="ph-ic"><svg class="ic"><use href="#i-phone"/></svg><i class="pring"></i></div>
+    <div class="ph-t"><b id="phName">Aucun téléphone</b>
+    <div class="ph-n"><span id="phSub">Connecte-le en Bluetooth ou par USB</span><span class="phbat" id="phBat" hidden><i><b id="phBatF"></b></i><em id="phBatT"></em></span></div></div>
+    <button class="go" id="phGo" hidden>CarPlay</button>
+  </section>
+
+  <div class="rbadge" id="rBadge" hidden><i></i><i></i><i></i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 17h14l-1.5-6.5a2 2 0 0 0-2-1.5h-7a2 2 0 0 0-2 1.5z"/><path d="M4 7a12 12 0 0 1 16 0M7 4.5a8 8 0 0 1 10 0" opacity=".7"/></svg><span>Radars de recul actifs</span></div>
+  <div class="hud" id="hud" aria-label="Vitesse"><div class="hud-v"><b id="hudV">0</b><small>km/h</small></div><i></i><div class="hud-c"><b id="hudC">– –</b><small>L/100 km</small></div></div>
+  <section class="card doortile" id="doorTile" aria-label="Ouvrants">
+    <svg viewBox="0 0 110 281" aria-hidden="true"><defs><linearGradient id="dtb" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".06"/><stop offset=".5" stop-color="#fff" stop-opacity=".24"/><stop offset="1" stop-color="#fff" stop-opacity=".06"/></linearGradient><linearGradient id="dtg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9db4d4" stop-opacity=".45"/><stop offset="1" stop-color="#9db4d4" stop-opacity=".12"/></linearGradient></defs><rect class="wh" x="3" y="52" width="11" height="34" rx="5"/><rect class="wh" x="96" y="52" width="11" height="34" rx="5"/><rect class="wh" x="3" y="199" width="11" height="34" rx="5"/><rect class="wh" x="96" y="199" width="11" height="34" rx="5"/>
+<path class="b" d="M55 23C74 23 86 31 90 50L94 78C96 92 97 105 97 122L97 190C97 214 96 232 92 244C88 256 74 260 55 260C36 260 22 256 18 244C14 232 13 214 13 190L13 122C13 105 14 92 16 78L20 50C24 31 36 23 55 23Z"/>
+<path class="pt " data-k="hood" d="M24 58C34 40 76 40 86 58L88 90H22Z"/><path class="ln" d="M55 42V88M41 48L36 86M69 48L74 86"/>
+<path class="hl" d="M17 56C18 46 24 40 34 37L33 47Z"/><path class="hl" d="M93 56C92 46 86 40 76 37L77 47Z"/>
+<path class="gl" d="M26 92C40 86 70 86 84 92L80 120H30Z"/>
+<path class="rf" d="M30 124H80L81 191H29Z"/>
+<path class="gl" d="M29 195H81L84 214C72 218 38 218 26 214Z"/>
+<path class="pt " data-k="trunk" d="M27 197H83L87 238C77 247 33 247 23 238Z"/>
+<path class="tl" d="M19 240L32 250L30 238Z"/><path class="tl" d="M91 240L78 250L80 238Z"/>
+<rect class="mir" x="5" y="96" width="11" height="8" rx="3.5"/><rect class="mir" x="94" y="96" width="11" height="8" rx="3.5"/>
+<rect class="dr l fl" data-k="fl" x="13" y="104" width="16" height="48" rx="3"/><rect class="dr l rl" data-k="rl" x="13" y="155" width="16" height="46" rx="3"/><rect class="dr r fr" data-k="fr" x="81" y="104" width="16" height="48" rx="3"/><rect class="dr r rr" data-k="rr" x="81" y="155" width="16" height="46" rx="3"/></svg>
+    <div class="dtxt"><b></b><span></span></div>
+  </section>
+
+
+  <section class="card doors v-veh" id="cardDoors">
+    <h2>Ouvrants et radars</h2>
+    <div class="doors-body">
+      <svg class="topcar" viewBox="0 0 110 281" aria-hidden="true"><rect class="wheel" x="3" y="52" width="11" height="34" rx="5"/><rect class="wheel" x="96" y="52" width="11" height="34" rx="5"/><rect class="wheel" x="3" y="199" width="11" height="34" rx="5"/><rect class="wheel" x="96" y="199" width="11" height="34" rx="5"/>
+<path class="body" d="M55 23C74 23 86 31 90 50L94 78C96 92 97 105 97 122L97 190C97 214 96 232 92 244C88 256 74 260 55 260C36 260 22 256 18 244C14 232 13 214 13 190L13 122C13 105 14 92 16 78L20 50C24 31 36 23 55 23Z"/>
+<path id="g-hood" class="part " d="M24 58C34 40 76 40 86 58L88 90H22Z"/><path class="ln" d="M55 42V88M41 48L36 86M69 48L74 86"/>
+<path class="hl" d="M17 56C18 46 24 40 34 37L33 47Z"/><path class="hl" d="M93 56C92 46 86 40 76 37L77 47Z"/>
+<path class="glass" d="M26 92C40 86 70 86 84 92L80 120H30Z"/>
+<path class="roof" d="M30 124H80L81 191H29Z"/>
+<path class="glass" d="M29 195H81L84 214C72 218 38 218 26 214Z"/>
+<path id="g-trunk" class="part " d="M27 197H83L87 238C77 247 33 247 23 238Z"/>
+<path class="tl" d="M19 240L32 250L30 238Z"/><path class="tl" d="M91 240L78 250L80 238Z"/>
+<rect class="mir" x="5" y="96" width="11" height="8" rx="3.5"/><rect class="mir" x="94" y="96" width="11" height="8" rx="3.5"/>
+<rect id="g-fl" class="part door l" x="13" y="104" width="16" height="48" rx="3"/><rect id="g-rl" class="part door l" x="13" y="155" width="16" height="46" rx="3"/><rect id="g-fr" class="part door r" x="81" y="104" width="16" height="48" rx="3"/><rect id="g-rr" class="part door r" x="81" y="155" width="16" height="46" rx="3"/></svg>
+      <ul class="dlist2">
+        <li><span>Conducteur</span><b id="d-fl">Indisponible</b></li>
+        <li><span>Passager</span><b id="d-fr">Indisponible</b></li>
+        <li><span>Arrière gauche</span><b id="d-rl">Indisponible</b></li>
+        <li><span>Arrière droite</span><b id="d-rr">Indisponible</b></li>
+        <li><span>Hayon</span><b id="d-trunk">Indisponible</b></li>
+        <li><span>Capot</span><b id="d-hood">Indisponible</b></li>
+        <li id="liRadar"><span>Radars</span><b id="d-radars">Indisponible</b></li>
+      </ul>
+    </div>
+  </section>
+  <p class="note v-veh">Information seulement. Rien n’est affiché tant que le poste ne le transmet pas.</p>
+
+  <nav class="dock v-hv" aria-label="Navigation">
+    <button class="dbtn" data-go="media"><i style="--c1:#ff5f7a;--c2:#d6246e"><svg class="ic"><use href="#i-music"/></svg></i><span>Média</span></button>
+    <button class="dbtn" data-go="split"><i style="--c1:#5ac8fa;--c2:#0a84ff"><svg class="ic"><use href="#i-split"/></svg></i><span>Multi-écran</span></button>
+    <button class="dbtn" data-go="monitor"><i style="--c1:#ff8a5b;--c2:#e5484d"><svg class="ic"><use href="#i-gauge"/></svg></i><span>Moniteur moteur</span></button>
+    <button class="dbtn" data-go="maint"><i><svg class="ic"><use href="#i-wrench"/></svg></i><span>Entretien</span></button>
+    <button class="dbtn" data-go="apps"><i style="--c1:#7d8aa0;--c2:#3b4558"><svg class="ic"><use href="#i-grid"/></svg></i><span>Apps</span></button>
+  </nav>
+
+  <!-- ============ APPS ============ -->
+  <section class="panel" id="view-apps" aria-hidden="true">
+    <div class="card appsbox">
+      <div class="pickbar" id="pickBar" hidden>Choisis l’application du raccourci</div>
+      <div class="appgrid" id="appGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============ MULTI-ÉCRAN (musique + navigation, au choix) ============ -->
+  <section class="panel" id="view-split" data-split="both" aria-hidden="true">
+    <div class="sbar">
+      <div class="seg" id="splitSeg"></div>
+      <button class="pill sm" id="swapBtn"><svg class="ic"><use href="#i-swap"/></svg>Inverser</button>
+    </div>
+    <div class="panes">
+      <div class="card pane" id="paneL"></div>
+      <div class="card pane" id="paneR"></div>
+    </div>
+  </section>
+
+  <!-- ============ MÉDIA (source unique, comme un poste d'origine) ============ -->
+  <section class="panel" id="view-media" aria-hidden="true"><div class="card mfull" id="mediaBox"></div></section>
+
+  <!-- ============ RS MONITOR ============ -->
+  <section class="panel" id="view-monitor" aria-hidden="true"><div class="card mmain" id="mMain"></div></section>
+
+  <!-- ============ ENTRETIEN ============ -->
+  <section class="panel" id="view-maint" aria-hidden="true"><div class="card mtbox" id="mtBox"></div></section>
+
+  <!-- ============ RÉGLAGES ============ -->
+  <section class="panel" id="view-settings" aria-hidden="true">
+    <nav class="card side" id="side"></nav>
+    <div class="card smain" id="smain"></div>
+  </section>
+
+  <!-- ============ DIAGNOSTIC ============ -->
+  <section class="panel" id="view-diag" aria-hidden="true">
+    <div class="card dcol">
+      <div class="dh"><button class="pill sm" data-go="settings"><svg class="ic"><use href="#i-back"/></svg>Réglages</button><h2>Diagnostic CAN <small>lecture seule</small></h2></div>
+      <div class="dsig" id="dsig"></div>
+    </div>
+    <div class="card dobs">
+      <h3>Observer 60 secondes</h3>
+      <p class="hint">Lance l’observation, puis allume les phares, ouvre une porte, passe la marche arrière… Chaque changement reçu du poste est listé avec sa source. Le rapport sert à brancher les bons signaux.</p>
+      <div class="obsrow">
+        <div class="ring"><svg viewBox="0 0 44 44"><circle class="rb" cx="22" cy="22" r="19"/><circle class="rf" id="ringF" cx="22" cy="22" r="19"/></svg><b id="ringT">60</b></div>
+        <div class="obsbtns"><button class="pill pri" id="obsGo">Lancer</button><button class="pill" id="obsCopy">Copier le rapport</button></div>
+      </div>
+      <div class="log" id="obsLog"></div>
+    </div>
+  </section>
+
+  <!-- ============ SIMULATEUR (dev) ============ -->
+  <aside class="sim" id="sim" hidden>
+    <button class="simtab" id="simTab">SIM</button>
+    <div class="simbody" id="simBody" hidden></div>
+  </aside>
+
+  <div class="sheet" id="srcSheet" hidden><div class="sheet-bg" data-close="1"></div><div class="sheet-box card"><div class="sh-h"><div><h3>Source audio</h3><small>Choisis ce que tu écoutes</small></div><button class="sh-x" data-close="1" aria-label="Fermer">×</button></div><div id="srcList"></div></div></div>
+
+  <aside class="notif" id="notifPanel" aria-hidden="true">
+    <div class="nhead"><h3>Centre de notifications</h3><button class="pill sm" id="nClear">Tout effacer</button></div>
+    <div class="qtiles" id="qTiles"></div>
+    <label class="qbright"><svg class="ic"><use href="#i-sun"/></svg><input type="range" class="rng" id="qBright" min="20" max="100"></label>
+    <div class="nlist" id="nList"></div>
+  </aside>
+  <div class="nscrim" id="nScrim" hidden></div>
+
+  <div id="xlayer"></div>
+
+  <div id="boot" class="on"><video id="bootVid" muted playsinline></video><i class="bamb" aria-hidden="true"></i><div class="bootfx p208fx"><div class="lwrap"><div class="blion"><i class="lglow"></i><img src="assets/logo.webp" alt="Peugeot"><div class="lsweep"><i></i></div></div></div><div class="bline"></div></div></div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <div class="brightness"></div>
+</div>
+
+<script>
+/* Démarrage rapide : la vidéo perso est lancée dès que possible, sans attendre le chargement du reste du launcher */
+(function(){ var v=document.getElementById('bootVid'); window.__bootPre=null;
+  try{ var r=indexedDB.open('m6',1); r.onupgradeneeded=function(){r.result.createObjectStore('p');};
+    r.onsuccess=function(){ try{ var q=r.result.transaction('p').objectStore('p').get('boot');
+      q.onsuccess=function(){ var b=q.result; if(!b||!v||v.getAttribute('src')) return; var u=URL.createObjectURL(b); window.__bootPre={url:u};
+        v.classList.remove('rdy'); v.hidden=false; v.addEventListener('playing',function(){ v.classList.add('rdy'); }); v.src=u; var p=v.play(); if(p&&p.catch)p.catch(function(){}); }; }catch(e){} }; }catch(e){} })();
+</script>
+<script>window.LITE=true</script>
+<script src="js/app.js"></script>
+<script src="js/monitor.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/car3d.js"></script>
+<script src="js/maint.js"></script>
+<script src="js/look.js"></script>
+</body>
+</html>

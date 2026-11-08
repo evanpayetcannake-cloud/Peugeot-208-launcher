@@ -1,0 +1,167 @@
+/* =========================================================
+   Démarrage Peugeot 208 — version « luxe » : lent, calme, monochrome argent.
+   Lion (assets/logo.webp, image du propriétaire) qui sort du noir, reflet chromé,
+   fine ligne de lumière, puis PEUGEOT / 208 / PERFORMANCE en fondus doux.
+   Durée ~6,4 s (minuterie dans js/shell.js). Uniquement transform + opacity.
+   Une vidéo perso (Réglages > Écran > Vidéo de démarrage) remplace cette animation.
+   ========================================================= */
+.p208fx{ position:relative; width:auto !important; display:none; flex-direction:column; align-items:center; gap:0;
+  animation:lxOut .9s 4.9s ease-in-out forwards; }
+.p208fx .lwrap{ will-change:transform; animation:lxPush 5.8s 0s cubic-bezier(.25,.1,.25,1) both; }
+#boot.fx .p208fx{ display:flex; }
+.p208fx::before{ display:none; }
+
+/* Lion */
+.p208fx .blion{ position:relative; width:15rem; height:15rem; opacity:0; transform:translate3d(0,.6rem,0) scale(1.07); will-change:transform,opacity;
+  animation:lxLion 2.1s .25s cubic-bezier(.22,1,.36,1) forwards; }
+.p208fx .blion img{ position:relative; display:block; width:100%; height:100%; object-fit:contain; }
+.p208fx .lglow{ position:absolute; left:50%; top:50%; width:30rem; height:30rem; margin:-15rem 0 0 -15rem; border-radius:50%;
+  background:radial-gradient(closest-side,rgba(200,215,240,.12),rgba(200,215,240,.04) 55%,rgba(200,215,240,0)); opacity:0; transform:scale(.8); will-change:transform,opacity; animation:lxGlow 2.4s .45s cubic-bezier(.22,1,.36,1) forwards; }
+.p208fx .lsweep{ position:absolute; top:0;right:0;bottom:0;left:0; overflow:hidden; pointer-events:none;
+  -webkit-mask:url(../assets/logo.webp) center/contain no-repeat; mask:url(../assets/logo.webp) center/contain no-repeat; }
+.p208fx .lsweep i{ position:absolute; top:-10%; height:120%; left:0; width:28%; opacity:1;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.14) 35%,rgba(255,255,255,.72) 50%,rgba(255,255,255,.14) 65%,transparent);
+  transform:translateX(-130%) skewX(-14deg); animation:lxSweep 2s 1.5s cubic-bezier(.45,0,.3,1) forwards; }
+
+/* Fine ligne de lumière qui s'ouvre depuis le centre */
+.p208fx .bline{ width:22rem; height:1px; margin:1.6rem 0 1.4rem; background:linear-gradient(90deg,transparent,rgba(255,255,255,.55) 30%,rgba(255,255,255,.85) 50%,rgba(255,255,255,.55) 70%,transparent);
+  opacity:0; transform:scaleX(0); animation:lxLine 1.5s 1.85s cubic-bezier(.65,0,.35,1) forwards; }
+
+/* Textes : 3 blocs « dévoilés »
+   - le bloc (halo + lueur) apparaît en fondu ;
+   - le texte glisse dans une fente invisible (.clip, overflow:hidden) : PEUGEOT descend depuis la ligne,
+     208 monte du bas avec une légère mise au point, PERFORMANCE se déploie depuis le centre. */
+.p208fx .bword{ display:flex; flex-direction:column; align-items:center; gap:.2rem; color:#fff; margin-top:-.9rem; }
+.p208fx .bword .t1, .p208fx .bword .t2, .p208fx .bword .t3{ display:block; margin:0; opacity:0; will-change:opacity; animation:lxFade 1.5s ease-out forwards; }
+.p208fx .bword .clip{ display:block; overflow:hidden; padding:.9rem 1.6rem; }
+.p208fx .bword .in{ display:block; will-change:transform,opacity; backface-visibility:hidden; }
+.p208fx .bword .t1{ animation-delay:2.15s; }
+.p208fx .bword .t1 .in{ font-family:"P208 Word",var(--f); font-size:1.05rem; font-weight:500; letter-spacing:.55em; margin-right:-.55em; color:rgba(235,240,248,.82);
+  opacity:0; transform:translate3d(0,60%,0); animation:lxReveal 1.5s 2.15s cubic-bezier(.22,1,.36,1) forwards; }
+.p208fx .bword .t2{ animation-delay:2.4s; margin-top:-1.3rem; }
+.p208fx .bword .t2 .clip{ padding-top:.4rem; padding-bottom:.8rem; }
+.p208fx .bword .t2 .in{ font-family:"P208 Num",var(--fd); font-size:6.4rem; line-height:1; font-weight:200 !important; letter-spacing:.04em; color:#f4f6fa;
+  opacity:0; transform:translate3d(0,60%,0); animation:lxReveal 1.5s 2.4s cubic-bezier(.22,1,.36,1) forwards; }
+.p208fx .bword .t3{ animation-delay:2.65s; margin-top:-1.3rem; }
+.p208fx .bword .t3 .in{ font-family:"P208 Word",var(--f); font-size:.98rem; font-weight:500; letter-spacing:.6em; margin-right:-.6em; color:rgba(170,200,240,.95);
+  opacity:0; transform:translate3d(0,60%,0); animation:lxReveal 1.5s 2.65s cubic-bezier(.22,1,.36,1) forwards; }
+.p208fx .bline{ will-change:transform,opacity; position:relative; z-index:2; }
+
+@keyframes lxPush{ from{ transform:scale(1); } to{ transform:scale(1.03); } }
+@keyframes lxOut{ from{ opacity:1; } to{ opacity:0; } }
+@keyframes lxLion{ 0%{ opacity:0; transform:translate3d(0,.6rem,0) scale(1.07); } 55%{ opacity:1; } 100%{ opacity:1; transform:translate3d(0,0,0) scale(1); } }
+@keyframes lxFade{ to{ opacity:1; } }
+@keyframes lxGlow{ 0%{ opacity:0; transform:scale(.8); } 60%{ opacity:1; } 100%{ opacity:.85; transform:scale(1); } }
+@keyframes lxSweep{ to{ transform:translateX(420%) skewX(-14deg); } }
+@keyframes lxLine{ 0%{ opacity:0; transform:scaleX(0); } 30%{ opacity:1; } 100%{ opacity:.7; transform:scaleX(1); } }
+@keyframes lxRise{ from{ opacity:0; transform:translate3d(0,.7rem,0); } to{ opacity:1; transform:translate3d(0,0,0); } }
+
+/* Animations réduites */
+[data-anim=reduced] .p208fx, [data-anim=reduced] .p208fx *, [data-anim=reduced] .p208fx *::before{ animation-duration:.01s !important; animation-delay:0s !important; }
+
+@keyframes lxReveal{ 0%{ opacity:0; transform:translate3d(0,60%,0); } 45%{ opacity:1; } 100%{ opacity:1; transform:translate3d(0,0,0); } }
+
+/* Rayonnement bleu léger sur les 3 blocs de texte :
+   - lueur fixe autour des lettres (dessinée une fois, ne coûte rien ensuite) ;
+   - halo bleu derrière chaque bloc qui « respire » et glisse doucement (opacity + transform seulement). */
+.p208fx .bword .t1, .p208fx .bword .t2, .p208fx .bword .t3{ position:relative; isolation:isolate; }
+.p208fx .bword .clip{ position:relative; }
+.p208fx .bword .t1 .in{ text-shadow:0 0 .5rem rgba(77,155,255,.55), 0 0 1.2rem rgba(77,155,255,.25); }
+.p208fx .bword .t2 .in{ text-shadow:0 0 .7rem rgba(77,155,255,.6), 0 0 2rem rgba(77,155,255,.3), 0 0 4rem rgba(77,155,255,.14); }
+.p208fx .bword .t3 .in{ text-shadow:0 0 .5rem rgba(90,165,255,.7), 0 0 1.3rem rgba(77,155,255,.3); }
+.p208fx .bword .t1::before, .p208fx .bword .t2::before, .p208fx .bword .t3::before{ content:""; position:absolute; z-index:-1; left:-10%; right:-10%; top:-15%; bottom:-15%; border-radius:50%;
+  background:radial-gradient(closest-side,rgba(77,155,255,.32),rgba(77,155,255,.1) 55%,rgba(77,155,255,0)); opacity:.35; will-change:transform,opacity;
+  animation:lxHalo 2.6s ease-in-out infinite alternate; }
+.p208fx .bword .t2::before{ left:-5%; right:-5%; top:0; bottom:0; background:radial-gradient(closest-side,rgba(77,155,255,.36),rgba(77,155,255,.12) 55%,rgba(77,155,255,0)); }
+@keyframes lxHalo{ 0%{ opacity:.3; transform:translate3d(-.8rem,0,0) scale(.92); } 100%{ opacity:1; transform:translate3d(.8rem,0,0) scale(1.06); } }
+[data-anim=reduced] .p208fx .bword .t1::before, [data-anim=reduced] .p208fx .bword .t2::before, [data-anim=reduced] .p208fx .bword .t3::before{ animation:none; opacity:.6; }
+
+/* Rayonnement léger sur tout le fond du démarrage : apparaît en douceur puis respire lentement (opacity/transform) */
+#boot .bamb{ position:absolute; top:-10%;right:-10%;bottom:-10%;left:-10%; z-index:0; pointer-events:none; opacity:0; will-change:transform,opacity;
+  background:
+    radial-gradient(60% 55% at 50% 42%, rgba(70,120,210,.16), rgba(70,120,210,.05) 55%, transparent 80%),
+    radial-gradient(45% 30% at 50% 100%, rgba(90,140,230,.10), transparent 75%),
+    radial-gradient(35% 35% at 12% 15%, rgba(120,160,230,.05), transparent 70%),
+    radial-gradient(35% 35% at 88% 20%, rgba(120,160,230,.05), transparent 70%);
+  animation:lxAmbIn 2.4s .1s ease-out forwards, lxAmb 5s 2.5s ease-in-out infinite alternate; }
+#boot:not(.fx) .bamb{ display:none; }
+#boot .p208fx{ z-index:1; }
+#boot[data-look=light] .bamb{ background:
+    radial-gradient(60% 55% at 50% 42%, rgba(61,139,255,.12), rgba(61,139,255,.04) 55%, transparent 80%),
+    radial-gradient(45% 30% at 50% 100%, rgba(61,139,255,.08), transparent 75%); }
+@keyframes lxAmbIn{ from{ opacity:0; transform:scale(.94); } to{ opacity:1; transform:scale(1); } }
+@keyframes lxAmb{ from{ opacity:1; transform:scale(1); } to{ opacity:.7; transform:scale(1.04); } }
+[data-anim=reduced] #boot .bamb{ animation:none; opacity:1; }
+
+/* =========================================================
+   Disparition « rideau » (≈ 4,5 s → 5,8 s), puis fondu du fond vers l'accueil :
+   1. les 3 textes s'effacent un par un en remontant légèrement (PERFORMANCE → 208 → PEUGEOT) ;
+   2. la ligne de lumière se replie vers le centre ;
+   3. le halo du lion s'ouvre une dernière fois, le lion avance doucement vers toi en s'effaçant ;
+   4. le rayonnement du fond s'éteint.
+   ========================================================= */
+.p208fx{ animation:none !important; }
+.p208fx .bword .t3 .clip{ animation:lxTxtOut .65s 4.45s cubic-bezier(.55,0,.75,.4) forwards; }
+.p208fx .bword .t2 .clip{ animation:lxTxtOut .7s 4.58s cubic-bezier(.55,0,.75,.4) forwards; }
+.p208fx .bword .t1 .clip{ animation:lxTxtOut .65s 4.72s cubic-bezier(.55,0,.75,.4) forwards; }
+.p208fx .bline{ animation:lxLine 1.5s 1.85s cubic-bezier(.65,0,.35,1) forwards, lxLineOut .6s 4.7s cubic-bezier(.55,0,.75,.4) forwards !important; }
+.p208fx .lglow{ animation:lxGlow 2.4s .45s cubic-bezier(.22,1,.36,1) forwards, lxGlowOut 1.1s 4.65s cubic-bezier(.3,0,.4,1) forwards !important; }
+.p208fx .lwrap{ animation:lxPush 5.8s 0s cubic-bezier(.25,.1,.25,1) both, lxLionOut 1.05s 4.75s cubic-bezier(.5,0,.25,1) forwards !important; }
+#boot .bamb{ animation:lxAmbIn 2.4s .1s ease-out forwards, lxAmb 5s 2.5s ease-in-out infinite alternate, lxAmbOut .9s 4.95s ease-in forwards !important; }
+@keyframes lxTxtOut{ from{ opacity:1; transform:translate3d(0,0,0); } to{ opacity:0; transform:translate3d(0,-.6rem,0); } }
+@keyframes lxLineOut{ from{ opacity:.7; transform:scaleX(1); } to{ opacity:0; transform:scaleX(0); } }
+@keyframes lxGlowOut{ 0%{ opacity:.85; transform:scale(1); } 35%{ opacity:1; transform:scale(1.18); } 100%{ opacity:0; transform:scale(1.5); } }
+@keyframes lxLionOut{ 0%{ opacity:1; transform:scale(1.024); } 30%{ opacity:1; } 100%{ opacity:0; transform:scale(1.12); } }
+@keyframes lxAmbOut{ from{ opacity:.85; } to{ opacity:0; } }
+[data-anim=reduced] .p208fx .bword :-webkit-any(.t1,.t2,.t3) .clip, [data-anim=reduced] .p208fx :-webkit-any(.bline,.lglow,.lwrap){ animation-duration:.01s !important; animation-delay:0s !important; }
+/* halos bleus des textes : s'éteignent avec leur texte */
+.p208fx .bword .t3::before{ animation:lxHalo 2.6s ease-in-out infinite alternate, lxHaloOut .6s 4.45s ease-in forwards !important; }
+.p208fx .bword .t2::before{ animation:lxHalo 2.6s ease-in-out infinite alternate, lxHaloOut .65s 4.58s ease-in forwards !important; }
+.p208fx .bword .t1::before{ animation:lxHalo 2.6s ease-in-out infinite alternate, lxHaloOut .6s 4.72s ease-in forwards !important; }
+@keyframes lxHaloOut{ to{ opacity:0; transform:translate3d(0,-.6rem,0) scale(.9); } }
+
+/* Version épurée : lion + trait de lumière + PEUGEOT (208 et PERFORMANCE retirés), ensemble recentré et un peu plus grand */
+.p208fx .blion{ width:18rem; height:18rem; }
+.p208fx .lglow{ width:34rem; height:34rem; margin:-17rem 0 0 -17rem; }
+.p208fx .bline{ width:26rem; margin:2rem 0 1.1rem; }
+.p208fx .bword{ margin-top:-.9rem; }
+.p208fx .bword .t1 .in{ font-size:1.3rem; letter-spacing:.7em; margin-right:-.7em; }
+.p208fx .bword .t1 .clip{ animation:lxTxtOut .7s 4.55s cubic-bezier(.55,0,.75,.4) forwards; }
+.p208fx .bword .t1::before{ animation:lxHalo 2.6s ease-in-out infinite alternate, lxHaloOut .65s 4.55s ease-in forwards !important; }
+.p208fx{ margin-top:-1rem; }
+/* Version minimale : lion + trait de lumière seulement (plus aucun texte), recentrés */
+.p208fx{ margin-top:0; }
+.p208fx .bline{ margin:2.2rem 0 0; }
+
+/* Trait de lumière redessiné : cœur fin dégradé bleu → blanc, lueur bleue douce dessous, point lumineux central qui respire */
+.p208fx .bline{ position:relative; width:30rem; height:2px; border-radius:2px; overflow:visible;
+  background:linear-gradient(90deg, transparent, rgba(77,155,255,.35) 14%, rgba(150,195,255,.85) 36%, #ffffff 50%, rgba(150,195,255,.85) 64%, rgba(77,155,255,.35) 86%, transparent) !important; }
+.p208fx .bline::before{ content:""; position:absolute; left:8%; right:8%; top:-.9rem; height:1.9rem; border-radius:50%; pointer-events:none;
+  background:radial-gradient(closest-side, rgba(77,155,255,.42), rgba(77,155,255,.12) 55%, transparent); }
+.p208fx .bline::after{ content:""; position:absolute; left:50%; top:50%; width:7rem; height:.5rem; margin:-.25rem 0 0 -3.5rem; border-radius:50%; pointer-events:none;
+  background:radial-gradient(closest-side, #fff, rgba(190,220,255,.7) 40%, transparent); will-change:opacity,transform;
+  animation:lxSpark 2.4s 3s ease-in-out infinite alternate; }
+@keyframes lxSpark{ from{ opacity:1; transform:scaleX(1); } to{ opacity:.55; transform:scaleX(.7); } }
+#boot[data-look=light] .p208fx .bline{ background:linear-gradient(90deg, transparent, rgba(40,90,190,.3) 14%, rgba(40,100,220,.7) 36%, #2a6fe0 50%, rgba(40,100,220,.7) 64%, rgba(40,90,190,.3) 86%, transparent) !important; }
+#boot[data-look=light] .p208fx .bline::before{ background:radial-gradient(closest-side, rgba(61,139,255,.25), transparent); }
+#boot[data-look=light] .p208fx .bline::after{ background:radial-gradient(closest-side, rgba(255,255,255,.95), rgba(61,139,255,.35) 45%, transparent); }
+[data-anim=reduced] .p208fx .bline::after{ animation:none; }
+/* Disparition plus rapide (≈ 4,1 s → 4,6 s), accueil en fondu de 0,8 s */
+.p208fx .bline{ animation:lxLine 1.5s 1.85s cubic-bezier(.65,0,.35,1) forwards, lxLineOut .4s 4.1s cubic-bezier(.55,0,.75,.4) forwards !important; }
+.p208fx .lglow{ animation:lxGlow 2.4s .45s cubic-bezier(.22,1,.36,1) forwards, lxGlowOut .7s 4.1s cubic-bezier(.3,0,.4,1) forwards !important; }
+.p208fx .lwrap{ animation:lxPush 5.8s 0s cubic-bezier(.25,.1,.25,1) both, lxLionOut .7s 4.15s cubic-bezier(.5,0,.25,1) forwards !important; }
+#boot .bamb{ animation:lxAmbIn 2.4s .1s ease-out forwards, lxAmb 5s 2.5s ease-in-out infinite alternate, lxAmbOut .6s 4.25s ease-in forwards !important; }
+
+/* Disparition plus rapide (≈ 4,1 s → 4,9 s) */
+.p208fx .bline{ animation:lxLine 1.5s 1.85s cubic-bezier(.65,0,.35,1) forwards, lxLineOut .4s 4.1s cubic-bezier(.55,0,.75,.4) forwards !important; }
+.p208fx .lglow{ animation:lxGlow 2.4s .45s cubic-bezier(.22,1,.36,1) forwards, lxGlowOut .7s 4.1s cubic-bezier(.3,0,.4,1) forwards !important; }
+.p208fx .lwrap{ animation:lxPush 5.8s 0s cubic-bezier(.25,.1,.25,1) both, lxLionOut .7s 4.15s cubic-bezier(.5,0,.25,1) forwards !important; }
+#boot .bamb{ animation:lxAmbIn 2.4s .1s ease-out forwards, lxAmb 5s 2.5s ease-in-out infinite alternate, lxAmbOut .6s 4.3s ease-in forwards !important; }
+
+/* Trait couleur argent chromé (comme le lion) */
+.p208fx .bline{ background:linear-gradient(90deg, transparent, rgba(120,126,136,.45) 14%, rgba(200,205,212,.9) 36%, #ffffff 50%, rgba(200,205,212,.9) 64%, rgba(120,126,136,.45) 86%, transparent) !important; }
+.p208fx .bline::before{ background:radial-gradient(closest-side, rgba(210,215,222,.28), rgba(210,215,222,.08) 55%, transparent) !important; }
+.p208fx .bline::after{ background:radial-gradient(closest-side, #fff, rgba(225,230,236,.65) 40%, transparent) !important; }
+#boot[data-look=light] .p208fx .bline{ background:linear-gradient(90deg, transparent, rgba(110,116,126,.35) 14%, rgba(80,86,96,.75) 36%, #3c424b 50%, rgba(80,86,96,.75) 64%, rgba(110,116,126,.35) 86%, transparent) !important; }
+#boot[data-look=light] .p208fx .bline::before{ background:radial-gradient(closest-side, rgba(90,96,106,.18), transparent) !important; }
+#boot[data-look=light] .p208fx .bline::after{ background:radial-gradient(closest-side, rgba(255,255,255,.95), rgba(150,156,166,.4) 45%, transparent) !important; }

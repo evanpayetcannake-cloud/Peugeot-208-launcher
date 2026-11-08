@@ -1,0 +1,151 @@
+/* =========================================================
+   Extras : Moniteur moteur, alertes, animation des portes, radars, caméra de recul
+   Perf : uniquement transform / opacity animés, pas de filter / backdrop-filter.
+   ========================================================= */
+
+/* ---------- Engrenage (haut droite) + pastille projection ---------- */
+.gear-btn{ width:2.6rem; height:2.6rem; display:grid; place-items:center; border-radius:50%; background:rgba(var(--card-rgb),.55); border:1px solid rgba(255,255,255,.12); }
+.gear-btn .ic{ width:1.35rem; height:1.35rem; color:var(--text,#fff); }
+.gear-btn:active{ transform:scale(.94); }
+.dot-on{ position:absolute; top:.7rem; right:.8rem; width:.55rem; height:.55rem; border-radius:50%; background:#34d399; box-shadow:0 0 .6rem #34d399; }
+.dbtn[data-go=monitor] .ic{ color:#ff6b6b; }
+
+/* ---------- Moniteur moteur ---------- */
+#view-monitor .mtabs{ width:14rem; flex:none; padding:.6rem; display:flex; flex-direction:column; gap:.2rem; }
+.mmain{ flex:1; padding:1.2rem; display:flex; flex-direction:column; gap:1rem; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none; min-width:0; }
+.mmain::-webkit-scrollbar{ display:none; }
+.recdot{ margin-left:auto; width:.6rem; height:.6rem; border-radius:50%; background:#ff4d4d; animation:recb 1s steps(2) infinite; }
+@keyframes recb{ 50%{ opacity:.15; } }
+
+.dials{ display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+.dial{ position:relative; aspect-ratio:1/.95; border-radius:1.2rem; background:rgba(255,255,255,.05); display:grid; place-items:center; text-align:center; transition:transform .12s; }
+.dial:active{ transform:scale(.97); }
+.dial svg{ position:absolute; top:.5rem;right:0;bottom:0;left:0; margin:auto; width:80%; height:80%; transform:rotate(135deg); overflow:visible; }
+.dial circle{ fill:none; stroke-width:7; stroke-linecap:round; }
+.dial .trk{ stroke:rgba(255,255,255,.1); stroke-dasharray:75 100; }
+.dial .arc{ stroke:var(--accent); stroke-dasharray:0 100; transition:stroke-dasharray .18s linear; will-change:stroke-dasharray; }
+.dial[data-s=bad] .arc{ stroke:#ff4d4d; }
+.dial[data-s=bad] .dv b{ color:#ff6b6b; }
+.dial[data-s=na] .arc{ stroke:transparent; }
+.dial[data-s=na]{ opacity:.55; }
+.dv{ display:flex; flex-direction:column; align-items:center; gap:.05rem; margin-top:-.4rem; }
+.dv b{ font-size:2.4rem; font-weight:700; line-height:1; font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+.dv small{ font-size:.72rem; color:var(--dim); }
+.dl{ position:absolute; left:0; right:0; bottom:.6rem; font-size:.78rem; font-weight:600; }
+.dp{ position:absolute; left:0; right:0; top:.5rem; font-size:.62rem; color:var(--dim); font-variant-numeric:tabular-nums; }
+.mfoot{ display:flex; align-items:center; justify-content:space-between; gap:1rem; font-size:.68rem; color:var(--dim); margin-top:auto; }
+
+.perf{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+.pc{ border-radius:1.2rem; background:rgba(255,255,255,.05); padding:1.2rem; display:flex; flex-direction:column; gap:.4rem; }
+.pc span{ font-size:.85rem; color:var(--dim); font-weight:600; }
+.pc b{ font-size:3.2rem; font-weight:700; font-variant-numeric:tabular-nums; line-height:1.1; }
+.pc small{ font-size:.72rem; color:var(--dim); }
+.pc.run{ outline:2px solid var(--accent); } .pc.run b{ color:var(--accent); }
+.peaks{ display:grid; grid-template-columns:repeat(4,1fr); gap:.8rem; }
+.peaks div{ padding:.8rem 1rem; border-radius:1rem; background:rgba(255,255,255,.045); display:flex; flex-direction:column; gap:.2rem; }
+.peaks span{ font-size:.68rem; color:var(--dim); } .peaks b{ font-size:1.25rem; font-variant-numeric:tabular-nums; }
+
+.stab{ display:flex; flex-direction:column; gap:.3rem; }
+.sh,.sr{ display:grid; grid-template-columns:1.2fr 1.3fr 1.6fr .6fr; align-items:center; gap:1rem; padding:.55rem 1rem; border-radius:.8rem; font-size:.82rem; }
+.sh{ color:var(--dim); font-size:.68rem; text-transform:uppercase; letter-spacing:.06em; }
+.sr{ background:rgba(255,255,255,.045); }
+.sr .hnt{ color:var(--dim); font-size:.68rem; }
+.sr .dot{ display:inline-block; width:.55rem; height:.55rem; border-radius:50%; background:#6b7280; margin-right:.6rem; }
+.sr.ok .dot{ background:#34d399; }
+.tg{ position:relative; width:2.9rem; height:1.65rem; border-radius:1rem; background:rgba(255,255,255,.18); transition:background .15s; }
+.tg::after{ content:""; position:absolute; top:.2rem; left:.2rem; width:1.25rem; height:1.25rem; border-radius:50%; background:#fff; transition:transform .15s; }
+.tg.on{ background:var(--accent); } .tg.on::after{ transform:translateX(1.25rem); }
+
+.logbox{ display:flex; flex-direction:column; gap:1.2rem; }
+.logbig{ display:flex; gap:1rem; }
+.logbig .pill{ height:3.4rem; padding:0 2rem; font-size:1rem; }
+.logst{ font-size:1rem; color:var(--dim); } .logst b{ color:var(--text,#fff); font-size:1.5rem; font-variant-numeric:tabular-nums; }
+.lim{ display:flex; flex-direction:column; gap:.3rem; }
+
+/* ---------- Alertes (tous les écrans) ---------- */
+#xlayer{ position:absolute; top:0;right:0;bottom:0;left:0; pointer-events:none; z-index:50; }
+#alertBar{ position:absolute; left:50%; top:4.7rem; transform:translateX(-50%); display:flex; gap:.6rem; }
+#alertBar[hidden]{ display:none; }
+.al{ display:inline-flex; align-items:center; gap:.55rem; padding:.55rem 1rem; border-radius:1.4rem; font-size:.82rem; font-weight:600; background:rgba(10,16,30,.92); border:1px solid rgba(255,255,255,.18); animation:alin .25s ease; }
+.al i{ width:.6rem; height:.6rem; border-radius:50%; background:#fbbf24; }
+.al.bad{ border-color:#ff4d4d; } .al.bad i{ background:#ff4d4d; animation:recb .7s steps(2) infinite; }
+.al.info i{ background:#60a5fa; } .al.ok i{ background:#34d399; }
+@keyframes alin{ from{ opacity:0; transform:translateY(-.5rem); } }
+
+/* ---------- Animation d'ouverture de porte (accueil) ---------- */
+#doorFx{ position:absolute; left:50%; top:5rem; transform:translateX(-50%); width:23rem; padding:1rem 1.4rem 1rem 1rem; border-radius:1.4rem; display:flex; align-items:center; gap:1.1rem;
+  background:rgba(var(--card-rgb),.9); border:1px solid rgba(255,255,255,.16); opacity:0; visibility:hidden; transition:opacity .2s, visibility 0s .2s; }
+#doorFx.on{ opacity:1; visibility:visible; transition:opacity .2s; animation:dfin .45s cubic-bezier(.2,.9,.3,1.25); }
+#doorFx.warn{ border-color:#ff4d4d; }
+#doorFx.mini{ width:auto; padding:.5rem 1.1rem .5rem .6rem; animation:none; top:4.7rem; }
+#doorFx.mini svg{ width:1.8rem; height:3.8rem; }
+@keyframes dfin{ from{ opacity:0; transform:translateX(-50%) scale(.85); } }
+#doorFx svg{ width:5.2rem; height:11rem; flex:none; overflow:visible; transition:width .3s, height .3s; }
+#doorFx .b{ fill:#cfd6df; } .dark #doorFx .b{ fill:#8a93a1; }
+[data-theme=night] #doorFx .b{ fill:#7b8493; }
+#doorFx .gl{ fill:#223048; } #doorFx .rf{ fill:#e7ecf2; transition:fill .3s; } [data-theme=night] #doorFx .rf{ fill:#9aa4b3; }
+#doorFx .wh{ fill:#10151c; }
+#doorFx .dr{ fill:#e2e8f0; stroke:rgba(0,0,0,.35); stroke-width:.8; transition:transform .55s cubic-bezier(.2,.9,.3,1.25), fill .2s; }
+#doorFx .dr.open{ fill:var(--accent); }
+#doorFx .dr.l.open{ transform:rotate(58deg); } #doorFx .dr.r.open{ transform:rotate(-58deg); }
+#doorFx .dr.fl{ transform-origin:21px 100px; } #doorFx .dr.rl{ transform-origin:21px 151px; }
+#doorFx .dr.fr{ transform-origin:99px 100px; } #doorFx .dr.rr{ transform-origin:99px 151px; }
+#doorFx .pt{ fill:#e2e8f0; stroke:rgba(0,0,0,.35); stroke-width:.8; transition:transform .55s cubic-bezier(.2,.9,.3,1.25), fill .2s; }
+#doorFx .pt.open{ fill:var(--accent); }
+#doorFx .pt.hood{ transform-origin:60px 30px; } #doorFx .pt.hood.open{ transform:translateY(-9px) scaleY(1.12); }
+#doorFx .pt.trunk{ transform-origin:60px 226px; } #doorFx .pt.trunk.open{ transform:translateY(9px) scaleY(1.12); }
+#doorFx .dome{ fill:#ffd98a; opacity:0; transition:opacity .3s; } #doorFx.on .dome{ opacity:.9; }
+.dtxt b{ display:block; font-size:1.15rem; font-weight:700; }
+.dtxt span{ font-size:.78rem; color:var(--dim); }
+#doorFx.warn .dtxt span{ color:#ff8a8a; }
+#doorFx.mini .dtxt b{ font-size:.9rem; } #doorFx.mini .dtxt span{ display:none; }
+
+/* ---------- Radars de recul + caméra ---------- */
+#radarFx{ position:absolute; top:0;right:0;bottom:0;left:0; display:flex; opacity:0; visibility:hidden; background:rgba(4,8,18,.94); transition:opacity .18s, visibility 0s .18s; pointer-events:none; }
+#radarFx.on{ opacity:1; visibility:visible; transition:opacity .18s; pointer-events:auto; }
+#radarFx.compact{ top:auto;right:auto;bottom:auto;left:auto; left:50%; bottom:8.5rem; transform:translateX(-50%); width:20rem; height:15rem; border-radius:1.4rem; background:rgba(var(--card-rgb),.92); border:1px solid rgba(255,255,255,.16); }
+.rcam{ flex:1.5; margin:1.6rem 0 1.6rem 1.6rem; border-radius:1.4rem; background:linear-gradient(#232b38,#10151d); position:relative; overflow:hidden; display:grid; place-items:center; color:var(--dim); font-size:.85rem; }
+.rcam svg.guides{ position:absolute; top:0;right:0;bottom:0;left:0; width:100%; height:100%; }
+.rcam .cl{ position:absolute; top:1rem; left:1.2rem; font-weight:700; color:#fff; font-size:1rem; }
+.rcam p{ position:relative; max-width:18rem; text-align:center; }
+#radarFx.compact .rcam{ display:none; }
+.rrad{ flex:1; display:grid; place-items:center; position:relative; }
+.rrad svg{ width:15rem; height:22rem; overflow:visible; }
+#radarFx.compact .rrad svg{ width:11rem; height:13rem; }
+.rrad .car{ fill:#cfd6df; } [data-theme=night] .rrad .car{ fill:#8a93a1; }
+.rrad .glass{ fill:#223048; }
+.rarc{ fill:none; stroke-width:9; stroke-linecap:round; stroke:rgba(255,255,255,.1); }
+.rarc.on.l1{ stroke:#a3e635; } .rarc.on.l2{ stroke:#fbbf24; } .rarc.on.l3{ stroke:#fb923c; } .rarc.on.l4{ stroke:#ff3b3b; }
+#radarFx[data-lv="1"] .rarc.on{ animation:rp 1.1s ease-in-out infinite; }
+#radarFx[data-lv="2"] .rarc.on{ animation:rp .75s ease-in-out infinite; }
+#radarFx[data-lv="3"] .rarc.on{ animation:rp .42s ease-in-out infinite; }
+#radarFx[data-lv="4"] .rarc.on{ animation:rp .18s steps(2) infinite; }
+@keyframes rp{ 50%{ opacity:.25; } }
+.rlab{ position:absolute; bottom:1.4rem; left:0; right:0; text-align:center; font-size:1.05rem; font-weight:700; }
+#radarFx[data-lv="4"] .rlab{ color:#ff5a5a; }
+
+/* ---------- Mini Moniteur moteur (écran partagé) ---------- */
+.mmini{ height:100%; display:grid; grid-template-columns:repeat(3,1fr); align-items:center; gap:.6rem; padding:1rem; text-align:center; }
+.mmini div{ display:flex; flex-direction:column; gap:.1rem; padding:1.2rem .4rem; border-radius:1rem; background:rgba(255,255,255,.05); }
+.mmini span{ font-size:.72rem; color:var(--dim); } .mmini b{ font-size:2.4rem; font-variant-numeric:tabular-nums; line-height:1.1; } .mmini small{ font-size:.68rem; color:var(--dim); }
+
+/* ---------- Scénarios du simulateur ---------- */
+.simscn{ margin-top:.5rem; }
+.simscn h4{ margin:.5rem 0 .3rem; }
+
+[data-anim=reduced] #doorFx,[data-anim=reduced] .al,[data-anim=reduced] .rarc{ animation:none !important; }
+
+/* ---------- Radio + sources + icônes d'applis ---------- */
+.app i img{ width:100%; height:100%; object-fit:cover; border-radius:1.2rem; }
+.radio{ height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; padding:1rem; text-align:center; }
+.rtop{ display:flex; gap:.7rem; align-items:center; font-size:.75rem; font-weight:700; }
+.rband{ padding:.2rem .6rem; border-radius:.5rem; background:var(--accent); color:var(--on-accent); }
+.rst{ color:var(--dim); } .rst.on{ color:#34d399; }
+.rfreq b{ font-size:5rem; font-weight:700; line-height:1; letter-spacing:-.03em; font-variant-numeric:tabular-nums; } .rfreq small{ font-size:1rem; color:var(--dim); margin-left:.4rem; }
+.rname{ font-size:1.2rem; font-weight:600; } .rrds{ font-size:.8rem; color:var(--dim); min-height:1.1rem; }
+.rpre{ display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem; margin-top:.6rem; }
+.rpre button,.srcrow button{ height:2.2rem; padding:0 .9rem; border-radius:1.1rem; font-size:.78rem; font-weight:600; background:rgba(255,255,255,.09); }
+.rpre button.on,.srcrow button.on{ background:var(--accent); color:var(--on-accent); }
+.srcrow{ display:flex; gap:.4rem; justify-content:center; margin:.5rem 0 0; }
+
+[data-view=monitor] .dim{ opacity:1; }

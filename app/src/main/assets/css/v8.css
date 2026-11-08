@@ -1,0 +1,9 @@
+/* v8 — Moniteur moteur en gris graphite (comme le reste de l'interface) */
+.bgf{ background:linear-gradient(#1d2025,#16181c); box-shadow:inset 0 0 0 1px rgba(255,255,255,.09); }
+.bgt{ color:var(--dim); }
+.bga,.bgb{ border:0; background:var(--tile); box-shadow:var(--tile-ring); color:#eef0f3; }
+.bt{ background:repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 2px, transparent 2px 6px); box-shadow:0 .55rem 0 -.3rem rgba(255,255,255,.22); }
+.bf{ background:linear-gradient(90deg,#9ca2ab 0%,#d5d9df 60%,#f4f5f7 100%); }
+.bk{ background:var(--accent); opacity:0; }
+.br[data-s=bad] .bf{ background:linear-gradient(90deg,#e8a04a,#e0404a); }
+.bgpill{ background:var(--tile); box-shadow:var(--tile-ring); color:#fff; }
